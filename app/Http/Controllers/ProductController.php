@@ -4,20 +4,6 @@ namespace App\Http\Controllers;
 
 use App\Models\Product;
 use Illuminate\Http\Request;
-/**
- * @OA\Post(
- *     path="/api/v1/users",
- *     summary="Get list of users",
- *     @OA\Response(
- *         response=200,
- *         description="Successful operation"
- *     ),
- *     @OA\Response(
- *         response=401,
- *         description="Unauthorized"
- *     )
- * )
- */
 
 class ProductController extends Controller
 {

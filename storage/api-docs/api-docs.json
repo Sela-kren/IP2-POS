@@ -5,10 +5,122 @@
         "version": "1.0.0"
     },
     "paths": {
-        "/api/v1/users": {
+        "api/products/create": {
             "post": {
+                "summary": "add the products",
+                "operationId": "c6ef90b23ccb808ab31258c217416446",
+                "responses": {
+                    "200": {
+                        "description": "Successful operation"
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    }
+                }
+            }
+        },
+        "/api/products": {
+            "get": {
                 "summary": "Get list of users",
-                "operationId": "835cb9f884b923eb30cb1c0262bf951c",
+                "operationId": "3040ea9a3e3cfab0aa76bcd375f2cab0",
+                "responses": {
+                    "200": {
+                        "description": "Successful operation"
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    }
+                }
+            }
+        },
+        "/api/products/{id}/addstock": {
+            "post": {
+                "summary": "add stock to the exsiting product by product id",
+                "operationId": "99ad2def0c40059f71277b0296e13178",
+                "responses": {
+                    "200": {
+                        "description": "Successful operation"
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    }
+                }
+            }
+        },
+        "/api/products/search": {
+            "post": {
+                "summary": "add stock to the exsiting product by product id",
+                "operationId": "83c2d6ac6c33f8a3402cf95cb3599227",
+                "responses": {
+                    "200": {
+                        "description": "Successful operation"
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    }
+                }
+            }
+        },
+        "/api/products/products_types": {
+            "get": {
+                "summary": "add stock to the exsiting product by product id",
+                "operationId": "7952dfb5ddb707c5a7ef6e525539710c",
+                "responses": {
+                    "200": {
+                        "description": "Successful operation"
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    }
+                }
+            }
+        },
+        "/api/promotion/manage": {
+            "post": {
+                "summary": "manage the promotion for product by productID",
+                "operationId": "e58e9db8720d8822162921f77696cef1",
+                "responses": {
+                    "200": {
+                        "description": "Successful operation"
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    }
+                }
+            }
+        },
+        "/api/promotion/{productId}": {
+            "post": {
+                "summary": "delete the promotion from promotion by productID",
+                "operationId": "3388945bc7dc77b686ae3064073dc25c",
+                "responses": {
+                    "200": {
+                        "description": "Successful operation"
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    }
+                }
+            }
+        },
+        "/api/promotion": {
+            "get": {
+                "summary": "list all the promotion",
+                "operationId": "3669a96563dfdd44d62d3a03436e6dff",
+                "responses": {
+                    "200": {
+                        "description": "Successful operation"
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    }
+                }
+            }
+        },
+        "/api/promotionHistory": {
+            "get": {
+                "summary": "check the history of promotion history",
+                "operationId": "e7ea442be5e363c963b458711327ea20",
                 "responses": {
                     "200": {
                         "description": "Successful operation"
