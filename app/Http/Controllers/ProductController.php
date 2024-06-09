@@ -4,14 +4,28 @@ namespace App\Http\Controllers;
 
 use App\Models\Product;
 use Illuminate\Http\Request;
+/**
+ * @OA\Post(
+ *     path="/api/v1/users",
+ *     summary="Get list of users",
+ *     @OA\Response(
+ *         response=200,
+ *         description="Successful operation"
+ *     ),
+ *     @OA\Response(
+ *         response=401,
+ *         description="Unauthorized"
+ *     )
+ * )
+ */
 
 class ProductController extends Controller
 {
     public function index()
     {
         $products = Product::all();
-        // return response()->json($products);
-        return view('product')->with('products', $products);
+        return response()->json($products);
+        // return view('product')->with('products', $products);
     }
 
     public function store(Request $request)
@@ -23,7 +37,8 @@ class ProductController extends Controller
             'name' => 'required|string',
             'image' => 'nullable|string',
             'unit_price' => 'required|numeric',
-            'discount' => 'nullable|numeric',
+            'stock' => 'required|numeric',
+            // 'discount' => 'nullable|numeric',
             'description' => 'nullable|string',
             'image' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048', // Image validation rules
         ]);
@@ -45,4 +60,35 @@ class ProductController extends Controller
         return response()->json($product, 201);
      
     }
+    
+    public function addStock(Request $request, $productId)
+    {
+        $request->validate([
+            'quantity' => 'required|integer|min:1', // Validate the incoming request data
+        ]);
+
+        $product = Product::findOrFail($productId); // Find the product by ID
+        $quantityToAdd = $request->input('quantity');
+
+        $product->stock += $quantityToAdd; // Increment the stock
+        $product->save(); // Save the updated product
+
+        return response()->json(['message' => 'Stock added successfully', 'product' => $product], 200);
+    }
+    public function search(Request $request)
+    {
+        $request->validate([
+            'query' => 'required|string|min:1', // Validate the incoming query parameter
+        ]);
+
+        $query = $request->input('query');
+
+        $products = Product::where('name', 'like', "%$query%") // Search by product name
+                           ->orWhere('code', 'like', "%$query%") // Search by product code
+                           ->orWhere('description', 'like', "%$query%") // Search by product description
+                           ->get();
+
+        return response()->json(['products' => $products], 200);
+    }
+    
 }

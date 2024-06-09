@@ -1,0 +1,34 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+        "title": "APIs for POS",
+        "version": "1.0.0"
+    },
+    "paths": {
+        "/api/v1/users": {
+            "post": {
+                "summary": "Get list of users",
+                "operationId": "835cb9f884b923eb30cb1c0262bf951c",
+                "responses": {
+                    "200": {
+                        "description": "Successful operation"
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    }
+                }
+            }
+        }
+    },
+    "components": {
+        "securitySchemes": {
+            "bearerAuth": {
+                "type": "http",
+                "name": "bearerAuth",
+                "in": "header",
+                "bearerFormat": "JWT",
+                "scheme": "bearer"
+            }
+        }
+    }
+}

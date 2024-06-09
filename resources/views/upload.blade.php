@@ -23,9 +23,12 @@
         
         <label for="unit_price">Unit Price:</label><br>
         <input type="text" id="unit_price" name="unit_price"><br><br>
+
+        <label for="unit_price">stock</label><br>
+        <input type="text" id="stock" name="stock"><br><br>
         
-        <label for="discount">Discount:</label><br>
-        <input type="text" id="discount" name="discount"><br><br>
+        <!-- <label for="discount">Discount:</label><br>
+        <input type="text" id="discount" name="discount"><br><br> -->
         
         <label for="description">Description:</label><br>
         <textarea id="description" name="description"></textarea><br><br>
