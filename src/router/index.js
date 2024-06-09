@@ -1,17 +1,22 @@
 import { createRouter,createWebHistory } from "vue-router";
 
-import dashboard from '../pages/main/dashboard'
-import { part } from "core-js/core/function";
-const routes = [
-    {
-        name: 'Dashboard',
-        part: '/',
-        component: dashboard
-    }
+import dashboard from '../views/dashboard.vue'
+import bookshift from '../views/bookshift.vue'
 
-]
+    const routes = [
+        {
+            path: '/',
+            name: 'Dashboard',
+            component:dashboard
+        },
+        {
+            path: '/bookshift',
+            name: 'BookShift',
+            component:bookshift
+        },
+    ];
 
-const router = router ();
+const router = Router ();
 export default router;
 function Router(){
     const router = new createRouter({
