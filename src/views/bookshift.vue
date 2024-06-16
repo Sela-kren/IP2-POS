@@ -20,30 +20,9 @@
                         <div class="w-32 h-10 bg-[#D9D9D9]  rounded-[30px] flex items-center justify-center">Novel</div>
                     </div>
                     <div class="mt-8 grid grid-cols-6 gap-8 min-w-[1500px] overflow-y-auto ">
-                        <Product></Product>
-                        <Product></Product>
-                        <Product></Product>
-                        <Product></Product>
-                        <Product></Product>
-                        <Product></Product>
-                        <Product></Product>
-                        <Product></Product>
-                        <Product></Product>
-                        <Product></Product>
-                        <Product></Product>
-                        <Product></Product>
-                        <Product></Product>
-                        <Product></Product>
-                        <Product></Product>
-                        <Product></Product>
-                        <Product></Product>
-                        <Product></Product>
-                        <Product></Product>
-                        <Product></Product>
-                        <Product></Product>
-                        <Product></Product>
-                        <Product></Product>
-                        <Product></Product>
+                        <Product v-for="product in products" :type_id="product.type_id" :key="product.id" :name="product.name" :image="`http://127.0.0.1:8000/storage/` + product.image"
+                            :unitPrice="product.unit_price"
+                        ></Product>
                     </div>
                     
                 </div>
@@ -53,27 +32,51 @@
 </template>
 
 <script>
-
+import axios from 'axios';
 import SideBar from '../components/pages/SideBar.vue';
 import Header from '../components/pages/Header.vue';
 import Product from '@/components/pages/Product.vue';
 
-// import { RouterLink, RouterView } from 'vue-router'
-
 export default {
-    name:"bookshift",
-    components:{
-        SideBar,
-        Header,
-        Product,
+  name: "bookshift",
+  components: {
+    SideBar,
+    Header,
+    Product
+  },
+  data() {
+    return {
+      products: []
+    };
+  },
+  mounted() {
+    this.fetchProducts();
+    console.error(this.products);
+  },
+  methods: {
+    async fetchProducts() {
+      try {
+        const response = await axios.get('http://127.0.0.1:8000/api/products');
+        this.products = response.data;
         
+      } catch (error) {
+        console.error('Error fetching products:', error);
+      }
     }
-
-}
-
-
-
+  },
+  
+  
+};
 </script>
+
+<style scoped>
+@import url("https://fonts.googleapis.com/css2?family=Josefin+Sans&family=Quicksand:wght@300;400&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Josefin+Sans&family=Lato:ital,wght@0,300;0,400;1,300&family=Quicksand:wght@300;400&display=swap");
+
+.container {
+  font-family: Quicksand;
+}
+</style>
 
 <style scoped>
 @import url("https://fonts.googleapis.com/css2?family=Josefin+Sans&family=Quicksand:wght@300;400&display=swap");
