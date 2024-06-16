@@ -13,7 +13,7 @@
                     </svg>
                     <p class="text-16 font-bold">Book Shift</p>
                 </div>
-                <div class="w-w-6/12 h-[898px] bg-white mt-4 flex py-4 px-8 flex-col">
+                <div class=" h-[898px] bg-white mt-4 flex py-4 px-8 flex-col">
                     <div class="flex space-x-8">
                         <div class="w-[70px] h-10 bg-[#D9D9D9]  rounded-[30px] flex items-center justify-center">All</div>
                         <div class="w-40 h-10 bg-[#FF5E01] text-white rounded-[30px] flex items-center justify-center">Education</div>

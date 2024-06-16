@@ -1,14 +1,14 @@
 
 <template>
     <!-- Side Bar -->
-   <div class="w-96 bg-[#0F172A]">
+   <div class="w-[300px] bg-[#0F172A]">
         <!-- header sidebar -->
         <div class="h-[80px] bg-[#0F172A] flex justify-satrt align-center">
             <div class="flex ">
                 <img src="../../assets/images/logo.png" class="w-[100px] h-[100px]" alt="">
                 <div class="flex mt-[30px] mr-[20px]">
-                    <p class="text-[#FF5E01] font-bold text-[18px]">BOOK</p>
-                    <p class="text-white font-bold text-[18px]">CORNER</p>
+                    <p class="text-[#FF5E01] font-bold text-[17px]">BOOK</p>
+                    <p class="text-white font-bold text-[17px]">CORNER</p>
                 </div>
             </div>
         </div>
