@@ -18,7 +18,19 @@ class ProductTypeController extends Controller
     }
     // working funtion with string
 
-
+    public function show($id)
+    {
+        // Find the product type by ID
+        $productType = ProductType::find($id);
+    
+        if (!$productType) {
+            // Return a 404 response if the product type is not found
+            return response()->json(['error' => 'Product type not found'], 404);
+        }
+    
+        // Return a JSON response with the product type data
+        return response()->json($productType);
+    }
     // public function store(Request $request)
     // {
     //     // Validate the request data
@@ -37,6 +49,7 @@ class ProductTypeController extends Controller
     //     return response()->json($productType, 201);
     // }
 
+    
     public function store(Request $request)
     {
         // Validate the request data

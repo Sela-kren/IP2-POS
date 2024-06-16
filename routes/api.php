@@ -17,14 +17,18 @@ Route::get('/test', function () {
 });
 // Route::post('/products', [ProductController::class, 'store']);
 
-// Route::get('/products', [ProductController::class, 'index']);
+// products route
+Route::get('/products', [ProductController::class, 'index']);
 
 Route::post('/products/{id}/addstock', [ProductController::class, 'addStock']);
 Route::post('/products/search', [ProductController::class, 'search']);
 
 Route::get('/product_types', [ProductTypeController::class, 'index']);
 // Route::post('/product_types/create', [ProductTypeController::class, 'store']);
+Route::get('/product-types/{id}', [ProductTypeController::class, 'show']);
 
+
+//promotion route
 Route::post('/promotion/manage', [PromotionController::class, 'managePromotion']);
 Route::post('/promotion/{productId}', [PromotionController::class, 'deleteByProductId']);
 Route::get('/promotion', [PromotionController::class, 'getPromotions']);
