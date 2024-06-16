@@ -14,9 +14,9 @@
                 <p class="text-[16px] text-[#FF5E01]">Clear All</p>
             </div>
         </div>
-        <div class="w-[400px] h-[482px] bg-[#F1F2F2] p-[20px] mt-8">
+        <div class="w-[400px] h-[482px] bg-[#F1F2F2] p-[20px] mt-8 overflow-y-auto">
             <div class="w-[360px] h-[100px] bg-white flex py-[10px] px-[10px] flex items-center justify-cenetr ">
-                <img class="w-[7opx] h-[80px]" src="../assets/images/python.jpg" alt="">
+                <img class="w-[7opx] h-[80px]" src="../../assets/images/python.jpg" alt="">
                 <div class="flex flex-col ml-8 justify-items-start">
                     <div class="w-[50px] h-[15px] bg-[#FF5E01] text-white flex items-center justify-center rounded-md">
                         <p class="text-[12px]">NOO1</p>

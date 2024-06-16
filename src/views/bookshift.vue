@@ -19,7 +19,7 @@
                         <div class="w-40 h-10 bg-[#FF5E01] text-white rounded-[30px] flex items-center justify-center">Education</div>
                         <div class="w-32 h-10 bg-[#D9D9D9]  rounded-[30px] flex items-center justify-center">Novel</div>
                     </div>
-                    <div class="mt-8 grid grid-cols-6 gap-8 min-w-[1500px] overflow-y-auto no-scrollbar">
+                    <div class="mt-8 grid grid-cols-6 gap-8 min-w-[1500px] overflow-y-auto ">
                         <Product></Product>
                         <Product></Product>
                         <Product></Product>
@@ -72,6 +72,7 @@ export default {
 }
 
 
+
 </script>
 
 <style scoped>
@@ -82,4 +83,6 @@ export default {
 .container{
     font-family: Quicksand;
 }
+
+
 </style>
