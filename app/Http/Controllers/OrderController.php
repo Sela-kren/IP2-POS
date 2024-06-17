@@ -2,15 +2,11 @@
 
 namespace App\Http\Controllers;
 
-// ============================================================================>> Core Library
-use Illuminate\Http\Request; // For Getting requested Payload from Client
-use Illuminate\Http\Response; // For Responsing data back to Client
+use Illuminate\Http\Request; 
+use Illuminate\Http\Response; 
 
-// ============================================================================>> Third Library
-use Tymon\JWTAuth\Facades\JWTAuth; // Get Current Logged User
+use Tymon\JWTAuth\Facades\JWTAuth; 
 
-// ============================================================================>> Custom Library
-// Controller
 use App\Http\Controllers\MainController;
 
 
@@ -29,7 +25,7 @@ class OrderController extends MainController
         // ===>> Get Data from DB (group by Product type from DB)
         $data = ProductType::select('id', 'name')
             ->with([
-                'products:id,name,image,type_id,unit_price' // 1:M
+                'products:id,name,image,type_id,unit_price,stock' // 1:M
             ])
             ->get();
 
@@ -80,6 +76,7 @@ class OrderController extends MainController
 
                 // ===>> Calculate the total Price
                 $totalPrice +=  $quantity * $product->unit_price;
+                $totalStock = $product->stock - $quantity;
 
             }
         }
@@ -90,6 +87,9 @@ class OrderController extends MainController
         // ===>> Update Order
         $order->total_price     = $totalPrice;
         $order->save();
+
+        $product->stock = $totalStock;
+        $product->save();
 
         // ===> Get Data for Client Reponse to view the order in Popup.
         $orderData = Order::select('*')
