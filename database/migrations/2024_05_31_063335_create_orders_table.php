@@ -9,12 +9,17 @@ class CreateOrdersTable extends Migration
     public function up()
     {
         Schema::create('orders', function (Blueprint $table) {
-            $table->id();
-            $table->unsignedBigInteger('cashier_id');
-            $table->string('receipt_number');
-            $table->integer('total_price');
+
+            $table->increments('id', true);
+
+            $table->integer('receipt_number')->unsigned()->nullable();
+
+            $table->integer('cashier_id')->index()->unsigned();
+            $table->foreign('cashier_id')->references('id')->on('user')->onDelete('cascade');
+            $table->double('total_price')->nullable();
             $table->integer('discount')->nullable();
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 

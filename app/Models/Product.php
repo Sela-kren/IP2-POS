@@ -4,6 +4,11 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasMany;
+
+use app\Models\ProductType;
+use app\Models\OrderDetail;
 
 class Product extends Model
 {
@@ -20,7 +25,7 @@ class Product extends Model
 
     public function productType()
     {
-        return $this->belongsTo(ProductType::class, 'type_id');
+        return $this->belongsTo(ProductType::class);
     }
 
     public function promotion()
