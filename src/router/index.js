@@ -4,7 +4,7 @@ import dashboard from '../views/dashboard.vue'
 import bookshift from '../views/bookshift.vue'
 import test from '../views/test.vue'
 import orderpage from '../views/orderpage.vue'
-
+import manage from '../views/manageBook.vue'
     const routes = [
         {
             path: '/',
@@ -26,6 +26,11 @@ import orderpage from '../views/orderpage.vue'
             path: '/test',
             name: 'Testcomponent',
             component:test,
+        },
+        {
+            path: '/manage',
+            name: 'managebook',
+            component:manage,
         },
 
     ];

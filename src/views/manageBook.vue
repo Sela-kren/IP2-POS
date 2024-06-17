@@ -11,24 +11,9 @@
                     <svg xmlns="http://www.w3.org/2000/svg" class="w-[20px] h-[20px] text-bold text-black " fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" >
                         <path stroke-linecap="round" stroke-linejoin="round" d="m8.25 4.5 7.5 7.5-7.5 7.5" />
                     </svg>
-                    <p class="text-16 font-bold">Book Shift</p>
+                    <p class="text-16 font-bold">Manage Book</p>
                 </div>
-                <div class="w-w-6/12 h-[898px] bg-white mt-4 flex py-4 px-8 flex-col">
-                    <!-- catecory box -->
-                    <div class="flex space-x-8">
-                        <div  @click="filterProducts(null)" 
-                        :class="{ 'bg-[#FF5E01] text-white': selectedCategory === null }"
-                        class="w-[70px] h-10 bg-[#D9D9D9]  rounded-[30px] flex items-center justify-center">All</div>
-                        <div  v-for="c in categories" @click="filterProducts(c.id)"
-                        :class="{ 'bg-[#FF5E01] text-white': selectedCategory === c.id }"
-                        class="w-40 h-10 bg-[#D9D9D9] rounded-[30px] flex items-center justify-center">{{c.name}}</div>
-                        
-                    </div>
-                    <div class="mt-8 grid grid-cols-6 gap-8 min-w-[1500px] overflow-y-auto ">
-                        <Product v-for="product in filteredProducts" :type_id="product.type_id" :key="product.id" :name="product.name" :image="`http://127.0.0.1:8000/storage/` + product.image"
-                            :unitPrice="product.unit_price"
-                        ></Product>
-                    </div>
+                <div class="w-w-6/12 h-[898px] bg-white mt-4 flex py-4 px-8 flex-col">    
                     
                 </div>
             </div> 
