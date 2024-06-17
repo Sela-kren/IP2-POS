@@ -9,21 +9,26 @@ use Illuminate\Http\Request;
 
 class OrderController extends Controller
 {
-    public function index()
-    {
-        $orders = Order::with('orderDetails')->get();
-        return response()->json($orders);
-    }
-
     public function store(Request $request)
     {
-        $order = Order::create($request->all());
-        
-        foreach ($request->order_details as $detail) {
-            $detail['order_id'] = $order->id;
-            OrderDetail::create($detail);
-        }
+        $request->validate([
+            'cashier_id' => 'required|integer',
+            'receipt_number' => 'required|string|max:255',
+            'total_price' => 'required|integer',
+            'discount' => 'nullable|integer',
+        ]);
 
-        return response()->json($order->load('orderDetails'), 201);
+        // Create the order
+        $order = Order::create([
+            'cashier_id' => $request->cashier_id,
+            'receipt_number' => $request->receipt_number,
+            'total_price' => $request->total_price,
+            'discount' => $request->discount,
+        ]);
+
+        return response()->json([
+            'message' => 'Order created successfully',
+            'order' => $order,
+        ], 201);
     }
 }
