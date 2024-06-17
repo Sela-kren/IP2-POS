@@ -9,6 +9,7 @@ use App\Http\Controllers\PromotionHistoryController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\Auth\AuthController;
 use App\Http\Controllers\OrderController;
+use App\Http\Controllers\ProfileController;
 
 Route::get('/user', function (Request $request) {
     return $request->user();
