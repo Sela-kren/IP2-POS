@@ -1,7 +1,7 @@
 
 <template>
     <!-- Side Bar -->
-   <div class="w-[300px] bg-[#0F172A]">
+   <div class="w-1/4 bg-[#0F172A]">
         <!-- header sidebar -->
         <div class="h-[80px] bg-[#0F172A] flex justify-satrt align-center">
             <div class="flex ">
