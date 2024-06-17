@@ -33,7 +33,7 @@ import manage from '../views/manageBook.vue'
             path: '/user',
             name:'user',
             component:user,
-        }
+        },
         {
             path: '/manage',
             name: 'managebook',
