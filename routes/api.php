@@ -7,10 +7,14 @@ use App\Http\Controllers\ProductTypeController;
 use App\Http\Controllers\PromotionController;
 use App\Http\Controllers\PromotionHistoryController;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\Auth\AuthController;
 
 Route::get('/user', function (Request $request) {
     return $request->user();
 })->middleware('auth:sanctum');
+
+Route::post('/login', [AuthController::class, 'login']);
+
 
 Route::get('/test', function () {
     return response()->json(['message' => 'API is working']);
@@ -34,8 +38,15 @@ Route::post('/promotion/{productId}', [PromotionController::class, 'deleteByProd
 Route::get('/promotion', [PromotionController::class, 'getPromotions']);
 Route::get('/promotionHistory', [PromotionHistoryController::class, 'index']);
 
-Route::get('/users', [UserController::class, 'index'])->name('users.index');
-Route::post('/users', [UserController::class, 'store'])->name('users.create');
-Route::put('/users/{id}', [UserController::class, 'update'])->name('users.update');
-Route::delete('/users/{id}', [UserController::class, 'destroy'])->name('users.destroy');
+// Route::get('/users', [UserController::class, 'index'])->name('users.index');
+// Route::post('/users', [UserController::class, 'store'])->name('users.create');
+// Route::put('/users/{id}', [UserController::class, 'update'])->name('users.update');
+// Route::delete('/users/{id}', [UserController::class, 'destroy'])->name('users.destroy');
 
+
+Route::post('/user', [UserController::class, 'create']);
+Route::get('/types', [UserController::class, 'getUserType']);
+Route::get('/user', [UserController::class, 'getData']); // Read Many Records
+Route::get('user/{id}', [UserController::class, 'view']); // View a Record
+Route::post('user/{id}', [UserController::class, 'update']); // Update Existing Record
+Route::delete('user/{id}', [UserController::class, 'delete']); // Delete a record
