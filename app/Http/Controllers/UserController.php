@@ -118,7 +118,7 @@ class UserController extends MainController
         if ($req->image) { // Yes
 
             // Call to File Service
-            $image     = FileUpload::uploadFile($req->image, 'users', $req->fileName);
+            $image = FileUpload::uploadFile($req->image, 'users', $req->fileName);
 
             // Only valid url can be used.
             if ($image['url']) {
