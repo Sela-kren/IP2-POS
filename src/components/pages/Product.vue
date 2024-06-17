@@ -12,7 +12,7 @@
       </div>
     </div>
   </template>
-  
+
   <script>
   import { RouterLink, RouterView } from 'vue-router';
   import axios from 'axios';
@@ -77,6 +77,5 @@
     }
     }
     };
-  
   </script>
   

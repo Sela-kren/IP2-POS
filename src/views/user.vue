@@ -14,6 +14,39 @@
                     <p class="text-16 font-bold">User</p>
                 </div>
                 <div class="w-w-6/12 h-[898px] bg-white mt-4 flex  flex-col">
+                   <div class="flex justify-between px-4 py-4">
+                        <div class="flex font-bold">
+                            <p class="text-[16px]">7</p>
+                            <p class="text-[16px] ml-4">users</p>
+                        </div>
+                        <div class="flex w-[150px] h-[45px] text-[#D9D9D9] border-2 border-[#D9D9D9] rounded-md items-center justify-center space-x-4">
+                            <div class="w-[20px] h-[20px] border rounded-[30px] border-[#948984] flex items-center">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="w-[20px] h-[20px] text-black" viewBox="0 0 24 24" fill="#948984">
+                                <path d="M11 11V5H13V11H19V13H13V19H11V13H5V11H11Z"></path></svg>
+                            </div>
+                            <p class="text-[20px] text-[#948984]">Create</p>
+                        </div>    
+                   </div>
+                   <div class="grid grid-row-8">
+                        <div class="w-full h-[60px] bg-[#0F172A] grid grid-cols-4 items-center justify-center text-white">
+                            <p>ID</p>
+                            <p>Cashier</p>
+                            <p>Contact</p>
+                            <p>Date</p>
+                        </div>
+                        <div class="w-full h-[60px] border border-b-[#D9D9D9]  grid grid-cols-4 items-center justify-center text-black font-bold">
+                            <p>1</p>
+                            <p>CHAB Sreylen</p>
+                            <p>091234567</p>
+                            <div class="flex items-center justify-center space-x-2">
+                                <p>2024-02-04</p>
+                                <p>12:00</p>
+                            </div>
+                        </div>
+                   </div>
+                    
+
+                    
                 </div>
             </div> 
         </div> 
@@ -28,7 +61,7 @@ import Header from '../components/pages/Header.vue';
 // import { RouterLink, RouterView } from 'vue-router'
 
 export default {
-    name:"dashboard",
+    name:"user",
     components:{
         SideBar,
         Header,

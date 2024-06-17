@@ -13,6 +13,7 @@
                     </svg>
                     <p class="text-16 font-bold">Book Shift</p>
                 </div>
+                <div class=" h-[898px] bg-white mt-4 flex py-4 px-8 flex-col">
                 <div class="w-w-6/12 h-[898px] bg-white mt-4 flex py-4 px-8 flex-col">
                     <!-- catecory box -->
                     <div class="flex space-x-8">
