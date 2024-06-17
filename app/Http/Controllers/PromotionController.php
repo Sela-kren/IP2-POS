@@ -5,7 +5,7 @@ use App\Models\Product;
 use Illuminate\Http\Request;
 use App\Models\Promotion;
 
-class PromotionController extends Controller
+class PromotionController extends MainController
 {
 
     public function getPromotions()

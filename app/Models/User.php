@@ -2,63 +2,43 @@
 
 namespace App\Models;
 
-// use Illuminate\Contracts\Auth\MustVerifyEmail;
-use Laravel\Sanctum\HasApiTokens;
-use Spatie\Permission\Traits\HasRoles;
-use Illuminate\Notifications\Notifiable;
-use Spatie\Permission\Models\Permission;
+// ===================================================>> Core Library
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
-use Kyslik\ColumnSortable\Sortable;
-class User extends Authenticatable
+use Laravel\Sanctum\HasApiTokens;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
+
+// ===================================================>> Thirdd Party Library
+use Tymon\JWTAuth\Contracts\JWTSubject;
+
+// ===================================================>> Custom Library
+use App\Models\Type;
+
+class User extends Authenticatable implements JWTSubject
 {
-    use HasApiTokens, HasFactory, Notifiable, Sortable;
+    use HasApiTokens, HasFactory, Notifiable;
 
-    /**
-     * The attributes that are mass assignable.
-     *
-     * @var array<int, string>
-     */
-    protected $fillable = [
-        'name',
-        'username',
-        'email',
-        'password',
-        'photo',
-        'email_verified_at',
-    ];
+    protected $table = 'user';
+    // Rest omitted for brevity
 
-    /**
-     * The attributes that should be hidden for serialization.
-     *
-     * @var array<int, string>
-     */
-    protected $hidden = [
-        'password',
-        'remember_token',
-    ];
-
-    /**
-     * Get the attributes that should be cast.
-     *
-     * @return array<string, string>
-     */
-    protected function casts(): array
+    public function getJWTIdentifier()
     {
-        return [
-            'email_verified_at' => 'datetime',
-            'password' => 'hashed',
-        ];
+        return $this->getKey();
     }
 
-    public $sortable = [
-        'name',
-        'username',
-        'email',
-    ];
-
-    public function getRouteKeyName()
+    public function getJWTCustomClaims()
     {
-        return 'username';
+        return [];
+    }
+
+    public function type(): BelongsTo //M:1
+    {
+        return $this->belongsTo(Type::class, 'type_id');
+    }
+
+    public function orders(): HasMany //1:M
+    {
+        return $this->hasMany(Order::class, 'cashier_id');
     }
 }

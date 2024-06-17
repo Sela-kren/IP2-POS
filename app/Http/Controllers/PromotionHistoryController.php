@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\PromotionHistory;
 
-class PromotionHistoryController extends Controller
+class PromotionHistoryController extends MainController
 {
     public function index()
     {
