@@ -1,6 +1,6 @@
 <template>
     <div class="w-screen h-screen bg-red-200 flex">
-        <SideBar></SideBar>
+        <SideBar class="w-1/5"></SideBar>
         <div class="w-full h-fit bg-blue-200">
             <Header></Header>
             <div class="h-[calc(100vh-50px)] bg-[#D9D9D9] py-8 px-8"> 

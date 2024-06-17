@@ -1,6 +1,6 @@
 <template>
   <div class="w-screen h-full flex">
-      <SideBar></SideBar>
+      <SideBar class="w-1/5"></SideBar>
       <div class="w-full">
           <Header></Header>
           <div class="flex-1 bg-[#D9D9D9] px-8 flex-col pt-4">
@@ -18,13 +18,13 @@
                       <div @click="filterProducts(null)" :class="{ 'bg-[#FF5E01] text-white': selectedCategory === null }" class="w-[70px] h-10 bg-[#D9D9D9] rounded-[30px] flex items-center justify-center cursor-pointer">All</div>
                       <div v-for="c in categories" :key="c.id" @click="filterProducts(c.id)" :class="{ 'bg-[#FF5E01] text-white': selectedCategory === c.id }" class="w-40 h-10 bg-[#D9D9D9] rounded-[30px] flex items-center justify-center cursor-pointer">{{c.name}}</div>
                   </div>
-                  <div class="mt-8 grid grid-cols-6 gap-8 min-w-[1500px] overflow-y-auto">
+                  <div class="mt-8 grid grid-cols-6 gap-8 overflow-y-auto">
                       <Product v-for="product in filteredProducts" :key="product.id" :type_id="product.type_id" :name="product.name" :image="`http://127.0.0.1:8000/storage/${product.image}`" :unitPrice="product.unit_price"></Product>
-                  </div>
+                  </div> 
               </div>
           </div>
       </div>
-  </div>
+  </div> 
 </template>
 
 <script>
