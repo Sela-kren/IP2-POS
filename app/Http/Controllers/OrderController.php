@@ -32,7 +32,10 @@ class OrderController extends MainController
         // ===> Success Response Back to Client
         return response()->json($data, Response::HTTP_OK);
     }
-
+    public function showOrder()
+    {
+        return view('order');
+    }
     public function makeOrder(Request $req){
 
         // ===>> Check validation
