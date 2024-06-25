@@ -8,6 +8,7 @@ use App\Http\Controllers\PromotionController;
 use App\Http\Controllers\PromotionHistoryController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\Auth\AuthController;
+use App\Http\Controllers\OrderController;
 use App\Http\Controllers\ProfileController;
 
 Route::get('/user', function (Request $request) {
@@ -53,5 +54,5 @@ Route::get('user/{id}', [UserController::class, 'view']); // View a Record
 Route::post('user/{id}', [UserController::class, 'update']); // Update Existing Record
 Route::delete('user/{id}', [UserController::class, 'delete']); // Delete a record
 
-
-Route::get('/profile', [ProfileController::class, 'view']);
+Route::get('/getproduct', [OrderController::class, 'getProducts']);
+Route::post('/orders', [OrderController::class, 'makeOrder']);
