@@ -13,6 +13,13 @@ class ProductController extends MainController
         return response()->json($products);
         // return view('product')->with('products', $products);
     }
+    public function show()
+    {
+          // Eager load the productType and promotion relationships
+          $products = Product::with(['productType', 'promotion'])->get();
+
+          return response()->json($products);
+    }
 
     public function store(Request $request)
     {

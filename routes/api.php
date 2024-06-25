@@ -27,6 +27,7 @@ Route::get('/products', [ProductController::class, 'index']);
 
 Route::post('/products/{id}/addstock', [ProductController::class, 'addStock']);
 Route::post('/products/search', [ProductController::class, 'search']);
+Route::get('/products/all', [ProductController::class, 'show']);
 
 Route::get('/product_types', [ProductTypeController::class, 'index']);
 // Route::post('/product_types/create', [ProductTypeController::class, 'store']);
