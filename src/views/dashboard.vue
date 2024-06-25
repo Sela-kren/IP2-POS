@@ -1,6 +1,6 @@
 <template>
     <div class="w-screen h-full flex">
-        <SideBar></SideBar>
+        <SideBar class="w-1/5"></SideBar>
         <div class="w-full">
             <Header></Header>
             <div class="flex-1  bg-[#D9D9D9] px-8 flex-col pt-4"> 

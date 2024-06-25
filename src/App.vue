@@ -1,30 +1,15 @@
-
 <template>
-  <div>
+  <div id="app" class="font-sans text-base text-gray-800 antialiased min-h-screen flex justify-center items-center">
     <router-view />
   </div>
-
 </template>
 
 <script>
-
-
 export default {
   name: 'App',
-  components: {
-    
-  }
 }
-
 </script>
 
-<style>
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-
-}
+<style lang="postcss">
+/* No custom styles needed in <style> tag when using Tailwind */
 </style>
