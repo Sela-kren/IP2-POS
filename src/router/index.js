@@ -1,5 +1,3 @@
-import { createRouter, createWebHistory } from 'vue-router';
-
 import dashboard from '../views/dashboard.vue';
 import bookshift from '../views/bookshift.vue';
 import test from '../views/test.vue';
@@ -14,7 +12,7 @@ const routes = [
   {
     path: '/',
     name: 'Dashboard',
-    component: dashboard,
+            component:dashboard,
   },
   {
     path: '/bookshift',
