@@ -16,7 +16,8 @@
                 <div class="w-w-6/12 h-[898px] bg-white mt-4 flex  flex-col">
                    <div class="flex justify-between px-4 py-4">
                         <div class="flex font-bold">
-                            <p class="text-[16px]">7</p>
+                            
+                            <p class="text-[16px]">{{totalUsers}}</p>
                             <p class="text-[16px] ml-4">users</p>
                         </div>
                         <div class="flex w-[150px] h-[45px] text-[#D9D9D9] border-2 border-[#D9D9D9] rounded-md items-center justify-center space-x-4 cursor-pointer">
@@ -78,10 +79,12 @@ export default {
     },
     data() {
     return {
-      users: {},
-      searchKey: '',
-      limit: 10,
-      page: 1
+        users: {},
+        totalUsers: 0,
+        searchKey: '',
+        limit: 10,
+        page: 1,
+        sort: 'desc'
     };
     },
     created() {
@@ -94,16 +97,31 @@ export default {
           params: {
             key: this.searchKey,
             limit: this.limit,
-            page: this.page
+            page: this.page,
+            sort: this.sort
           }
         });
-        this.users = response.data;
+        this.users = response.data.data;
+        this.totalUsers = response.data.total_users;
       } catch (error) {
         console.error('Error fetching data:', error);
       }
     },
+    nextPage() {
+      if (this.users.next_page_url) {
+        this.page++;
+        this.fetchData();
+      }
+    },
+    prevPage() {
+      if (this.users.prev_page_url) {
+        this.page--;
+        this.fetchData();
+      }
+    }
+  }
 }
-}
+
 
 
 
