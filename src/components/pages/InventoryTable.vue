@@ -28,10 +28,12 @@
             <div v-if="showPopup" class="w-[160px] h-[88px] absolute top-6 right-4 bg-white border py-2 px-3 shadow-lg z-10 rounded-md" ref="popup">
                 <!-- Your pop-up content goes here -->
                 <div class="w-full h-full flex flex-col justify-evenly gap-2.5">
-                    <div class="flex items-center justify-between px-1">
-                        <img src="../../assets/images/Group 104.svg" class="w-1/3 h-6" alt="">
-                        <p class="w-2/3 text-sm text-start">Edit Product</p>
-                    </div>
+                    <router-link :to="'/manage/update/' + id" class="flex items-center justify-between px-1">
+                       
+                            <img src="../../assets/images/Group 104.svg" class="w-1/3 h-6" alt="">
+                            <p class="w-2/3 text-sm text-start">Edit Product</p>
+                        
+                    </router-link>
                     <div class="flex items-center justify-between px-1">
                         <img src="../../assets/images/Group 107.svg" class="w-1/3 h-6" alt="">
                         <p class="w-2/3 text-sm text-red-500 text-start">Delete</p>
@@ -54,6 +56,10 @@ export default {
         };
     },
     props: {
+        id: {
+            type: String,
+            required: true
+        },
         type_id: {
             type: String,
             required: true
