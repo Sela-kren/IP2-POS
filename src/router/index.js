@@ -5,6 +5,7 @@ import bookshift from '../views/bookshift.vue'
 import test from '../views/test.vue'
 import orderpage from '../views/orderpage.vue'
 import user from '../views/user.vue'
+import login from '../views/login.vue'
 
 import manage from '../views/manageBook.vue'
     const routes = [
@@ -39,6 +40,12 @@ import manage from '../views/manageBook.vue'
             name: 'managebook',
             component:manage,
         },
+        {
+            path: '/login',
+            name: 'login',
+            component:login,
+        },
+        
 
     ];
 
