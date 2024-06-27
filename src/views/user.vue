@@ -28,19 +28,27 @@
                         </div>    
                    </div>
                    <div class="grid grid-row-8">
-                        <div class="w-full h-[60px] bg-[#0F172A] grid grid-cols-4 items-center justify-center text-white">
+                    <div class="flex justify-between items-center mb-4">
+                        <input v-model="searchKey" @input="fetchData" type="text" placeholder="Search by name or phone" class="p-2 border rounded">
+                        <select v-model="limit" @change="fetchData" class="p-2 border rounded">
+                            <option value="10">10</option>
+                            <option value="20">20</option>
+                            <option value="50">50</option>
+                        </select>
+                    </div>
+                        <div class="w-full h-[60px] bg-[#0F172A] grid grid-cols-4 items-center justify-around text-white">
                             <p>ID</p>
                             <p>Cashier</p>
                             <p>Contact</p>
                             <p>Date</p>
                         </div>
-                        <div class="w-full h-[60px] border border-b-[#D9D9D9]  grid grid-cols-4 items-center justify-center text-black font-bold">
-                            <p>1</p>
-                            <p>CHAB Sreylen</p>
-                            <p>091234567</p>
-                            <div class="flex items-center justify-center space-x-2">
-                                <p>2024-02-04</p>
-                                <p>12:00</p>
+                        <div v-for="user in users.data" :key="user.id" class="w-full h-[60px] border border-b-[#D9D9D9]  grid grid-cols-4 items-center justify-around text-black font-bold">
+                            <p>{{ user.id }}</p>
+                            <p>{{ user.name }}</p>
+                            <p>{{ user.phone }}</p>
+                            <div class="flex items-center space-x-2">
+                                <p>{{ user.created_at }}</p>
+                                <p>{{ user.is_active ? 'Yes' : 'No' }}</p>
                             </div>
                         </div>
                    </div>
@@ -57,6 +65,7 @@
 
 import SideBar from '../components/pages/SideBar.vue';
 import Header from '../components/pages/Header.vue';
+import axios from 'axios';
 
 // import { RouterLink, RouterView } from 'vue-router'
 
@@ -66,9 +75,36 @@ export default {
         SideBar,
         Header,
         
-    }
-
+    },
+    data() {
+    return {
+      users: {},
+      searchKey: '',
+      limit: 10,
+      page: 1
+    };
+    },
+    created() {
+    this.fetchData();
+    },
+    methods: {
+    async fetchData() {
+      try {
+        const response = await axios.get('http://127.0.0.1:8000/api/user', {
+          params: {
+            key: this.searchKey,
+            limit: this.limit,
+            page: this.page
+          }
+        });
+        this.users = response.data;
+      } catch (error) {
+        console.error('Error fetching data:', error);
+      }
+    },
 }
+}
+
 
 
 
