@@ -19,7 +19,7 @@
                             <p class="text-[16px]">7</p>
                             <p class="text-[16px] ml-4">users</p>
                         </div>
-                        <div class="flex w-[150px] h-[45px] text-[#D9D9D9] border-2 border-[#D9D9D9] rounded-md items-center justify-center space-x-4">
+                        <div class="flex w-[150px] h-[45px] text-[#D9D9D9] border-2 border-[#D9D9D9] rounded-md items-center justify-center space-x-4 cursor-pointer">
                             <div class="w-[20px] h-[20px] border rounded-[30px] border-[#948984] flex items-center">
                                 <svg xmlns="http://www.w3.org/2000/svg" class="w-[20px] h-[20px] text-black" viewBox="0 0 24 24" fill="#948984">
                                 <path d="M11 11V5H13V11H19V13H13V19H11V13H5V11H11Z"></path></svg>
