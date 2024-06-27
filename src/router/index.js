@@ -1,3 +1,5 @@
+import { createRouter, createWebHistory } from 'vue-router';
+
 import dashboard from '../views/dashboard.vue';
 import bookshift from '../views/bookshift.vue';
 import test from '../views/test.vue';
@@ -6,13 +8,15 @@ import user from '../views/user.vue';
 import updateP from '../views/Product/updateProduct.vue';
 import manage from '../views/manageBook.vue';
 
+
+import login from '@/views/login.vue';
 import product from '@/views/Product/Product'
 
 const routes = [
   {
     path: '/',
     name: 'Dashboard',
-            component:dashboard,
+    component: dashboard,
   },
   {
     path: '/bookshift',
@@ -28,6 +32,11 @@ const routes = [
     path: '/test',
     name: 'Testcomponent',
     component: test,
+  },
+  {
+    path: '/login',
+    name: 'login',
+    component: login,
   },
   {
     path: '/user',
