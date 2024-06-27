@@ -4,7 +4,10 @@ import dashboard from '../views/dashboard.vue';
 import bookshift from '../views/bookshift.vue';
 import test from '../views/test.vue';
 import orderpage from '../views/orderpage.vue';
-import user from '../views/user.vue';
+
+import user from '../views/user/user.vue';
+import CreateUser from '../views/user/createUser.vue';
+
 import updateP from '../views/Product/updateProduct.vue';
 import manage from '../views/manageBook.vue';
 
@@ -42,6 +45,13 @@ const routes = [
     path: '/user',
     name: 'user',
     component: user,
+    children: [
+      {
+        path: 'createUser',
+        name: 'createUser',
+        component: CreateUser,
+      }
+    ]
   },
   {
     path: '/manage',
