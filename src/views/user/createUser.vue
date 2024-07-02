@@ -1,5 +1,3 @@
-<!-- src/views/user/CreateUser.vue -->
-
 <template>
   <div class="flex flex-col w-[626px] h-[554px] pl-5">
     <h2 class="text-2xl font-bold mb-4">Create User</h2>
@@ -23,18 +21,23 @@
             <label class="block text-gray-700 text-sm font-bold mb-2" for="password">Password</label>
             <input v-model="password" type="password" id="password" class="w-[323px] p-2 border rounded border-gray-300" required />
           </div>
+          <div class="mb-4">
+            <label class="block text-gray-700 text-sm font-bold mb-2" for="type_id">Role</label>
+            <input v-model="type_id" type="text" id="type_id" class="w-[323px] p-2 border rounded border-gray-300" required />
+          </div>
           <div class="flex justify-end space-x-4">
             <button type="button" @click="cancel" class="bg-gray-500 hover:bg-gray-700 text-white font-bold py-2 px-4 rounded">Cancel</button>
             <button type="submit" class="bg-[#FF5E01] hover:bg-[#FF5E01] text-white font-bold py-2 px-4 rounded">Create</button>
           </div>
-    </form>
+        </form>
       </div>
     </div>
-    
   </div>
 </template>
 
 <script>
+import axios from 'axios';
+
 export default {
   name: "CreateUser",
   data() {
@@ -42,20 +45,23 @@ export default {
       name: '',
       email: '',
       phone: '',
-      password: ''
+      password: '',
+      type_id: ''
     };
   },
   methods: {
     async createUser() {
       try {
-        await axios.post('http://127.0.0.1:8000/api/user', {
+        const response = await axios.post('http://127.0.0.1:8000/api/user', {
           name: this.name,
           email: this.email,
           phone: this.phone,
-          password: this.password
+          password: this.password,
+          type_id: this.type_id
         });
-        this.$emit('close');
-        this.$router.push({ name: 'user' });
+        console.log('User created:', response.data.message);
+        this.$emit('close'); // Close modal or navigate away
+        this.$router.push({ name: 'user' }); // Navigate to user list
       } catch (error) {
         console.error('Error creating user:', error);
       }
@@ -64,13 +70,9 @@ export default {
       this.$emit('close');
     }
   }
-}
+};
 </script>
 
 <style scoped>
-@import url("https://fonts.googleapis.com/css2?family=Josefin+Sans&family=Quicksand:wght@300;400&display=swap");
-
-.container {
-  font-family: Quicksand;
-}
+/* Your scoped styles here */
 </style>

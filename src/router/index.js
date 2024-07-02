@@ -7,6 +7,7 @@ import orderpage from '../views/orderpage.vue';
 
 import user from '../views/user/user.vue';
 import CreateUser from '../views/user/createUser.vue';
+import UpdateUser from '../views/user/updateUser.vue';
 
 import updateP from '../views/Product/updateProduct.vue';
 import manage from '../views/manageBook.vue';
@@ -50,7 +51,16 @@ const routes = [
         path: 'createUser',
         name: 'createUser',
         component: CreateUser,
-      }
+      },
+      {
+        path: 'updateUser/:id',
+        name: 'updateUser',
+        component: UpdateUser,
+        props: (route) => ({
+          id: route.params.id,
+          // Other props as needed
+      }),
+      },
     ]
   },
   {
