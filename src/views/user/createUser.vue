@@ -1,30 +1,36 @@
 <!-- src/views/user/CreateUser.vue -->
 
 <template>
-  <div>
+  <div class="flex flex-col w-[626px] h-[554px] pl-5">
     <h2 class="text-2xl font-bold mb-4">Create User</h2>
-    <form @submit.prevent="createUser">
-      <div class="mb-4">
-        <label class="block text-gray-700 text-sm font-bold mb-2" for="name">Name</label>
-        <input v-model="name" type="text" id="name" class="p-2 border rounded w-full" required />
-      </div>
-      <div class="mb-4">
-        <label class="block text-gray-700 text-sm font-bold mb-2" for="email">Email</label>
-        <input v-model="email" type="email" id="email" class="p-2 border rounded w-full" required />
-      </div>
-      <div class="mb-4">
-        <label class="block text-gray-700 text-sm font-bold mb-2" for="phone">Phone</label>
-        <input v-model="phone" type="text" id="phone" class="p-2 border rounded w-full" required />
-      </div>
-      <div class="mb-4">
-        <label class="block text-gray-700 text-sm font-bold mb-2" for="password">Password</label>
-        <input v-model="password" type="password" id="password" class="p-2 border rounded w-full" required />
-      </div>
-      <div class="flex justify-end space-x-4">
-        <button type="button" @click="cancel" class="bg-gray-500 hover:bg-gray-700 text-white font-bold py-2 px-4 rounded">Cancel</button>
-        <button type="submit" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">Create</button>
-      </div>
+    <div class="w-[576px] h-[468px] flex flex-row pt-10 justify-center">
+      <div class="w-[155px] h-[120px] bg-red-400 mt-2"></div>
+      <div class="ml-10">
+        <form @submit.prevent="createUser">
+          <div class="mb-4">
+            <label class="block text-gray-700 text-sm font-bold mb-2 " for="name">Full Name</label>
+            <input v-model="name" type="text" id="name" class="p-2 border rounded w-full border-gray-300" required />
+          </div>
+          <div class="mb-4">
+            <label class="block text-gray-700 text-sm font-bold mb-2" for="email">Email</label>
+            <input v-model="email" type="email" id="email" class="w-[323px] p-2 border rounded border-gray-300" required />
+          </div>
+          <div class="mb-4">
+            <label class="block text-gray-700 text-sm font-bold mb-2" for="phone">Phone</label>
+            <input v-model="phone" type="text" id="phone" class="w-[323px] p-2 border rounded border-gray-300" required />
+          </div>
+          <div class="mb-4">
+            <label class="block text-gray-700 text-sm font-bold mb-2" for="password">Password</label>
+            <input v-model="password" type="password" id="password" class="w-[323px] p-2 border rounded border-gray-300" required />
+          </div>
+          <div class="flex justify-end space-x-4">
+            <button type="button" @click="cancel" class="bg-gray-500 hover:bg-gray-700 text-white font-bold py-2 px-4 rounded">Cancel</button>
+            <button type="submit" class="bg-[#FF5E01] hover:bg-[#FF5E01] text-white font-bold py-2 px-4 rounded">Create</button>
+          </div>
     </form>
+      </div>
+    </div>
+    
   </div>
 </template>
 
