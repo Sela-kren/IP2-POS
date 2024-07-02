@@ -10,8 +10,11 @@
   </div>
   <div class="w-w-6/12 h-[898px] bg-white mt-4">
   <form @submit.prevent="updateProduct" class="flex justify-between px-16 py-10">
-    <div class="flex flex-col items-center h-full w-1/2">        
-      <img class="w-full object-contain h-[300px] pb-3 bg-slate-50 mt-11" :src="`http://127.0.0.1:8000/storage/${this.product.image}`" alt="">
+    <div class="flex flex-col items-center h-full w-1/2">
+      <div class="w-full h-[300px] bg-green-50 mt-11">
+
+      </div>
+      
       <!-- handle leftside -->
       <div class="mb-3 w-full">
           <label for="" class="mb-[8px] block text-sm font-medium">
@@ -39,7 +42,6 @@
           class="w-full bg-transparent rounded-md border border-stroke dark:border-dark-3 p-5 text-dark-6 
           outline-none transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-gray-2
           focus:border-orange-500 focus:ring-orange-500"
-          
         ></textarea>
       </div>
 
@@ -75,23 +77,6 @@
           ocus:outline-none focus:border-orange-500 focus:ring-orange-500
           "
         />
-      </div>
-
-      <div class="mb-3 w-full">
-        <label for="" class="mb-[8px] block text-sm font-medium">
-          Category
-        </label>
-        <div class="relative z-20">
-          <select
-            v-model="product.type_id"
-            class="relative z-20 w-full appearance-none rounded-lg border border-stroke dark:border-dark-3 bg-transparent py-[10px] px-5 text-dark-6 outline-none transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-gray-2"
-          >
-            <option v-for="c in categories" :value="c.id" class="dark:bg-dark-2">{{ c.name }}</option>
-          </select>
-          <span
-            class="absolute right-4 top-1/2 z-10 mt-[-2px] h-[10px] w-[10px] -translate-y-1/2 rotate-45 border-r-2 border-b-2 border-body-color"
-          ></span>
-        </div>
       </div>
       <!-- Product fields -->
       <div class="w-full flex justify-between">
@@ -142,7 +127,22 @@
         />
       </div> 
 
-      
+      <div class="mb-3 w-full">
+        <label for="" class="mb-[8px] block text-sm font-medium">
+          Category
+        </label>
+        <div class="relative z-20">
+          <select
+            v-model="product.type_id"
+            class="relative z-20 w-full appearance-none rounded-lg border border-stroke dark:border-dark-3 bg-transparent py-[10px] px-5 text-dark-6 outline-none transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-gray-2"
+          >
+            <option v-for="c in categories" :value="c.id" class="dark:bg-dark-2">{{ c.name }}</option>
+          </select>
+          <span
+            class="absolute right-4 top-1/2 z-10 mt-[-2px] h-[10px] w-[10px] -translate-y-1/2 rotate-45 border-r-2 border-b-2 border-body-color"
+          ></span>
+        </div>
+      </div>
         
       
       <div class="mb-3 w-full">
@@ -231,32 +231,9 @@ export default {
   },
   mounted(){
     this.fetchCategories();
-    this.fetchProduct();
-    this.fetchPromtion();
-    
   },
   props: ['id'],
   methods: {
-    async fetchProduct() {
-      try {
-      const response = await axios.get(`http://127.0.0.1:8000/api/products/${this.id}`, {
-        params: {
-          exclude: 'promotion'  // Assuming your Laravel API supports this parameter
-        }
-      });
-      this.product = response.data;
-    } catch (error) {
-      console.error('Error fetching product:', error);
-    }
-    },
-    async fetchPromtion(){
-      try {
-      const response = await axios.get(`http://127.0.0.1:8000/api/promotion/${this.id}`)
-      this.promotion = response.data;
-    } catch (error) {
-      console.error('Error fetching product:', error);
-    }
-    }, 
     async fetchCategories() {
       try {
         const response = await axios.get('http://127.0.0.1:8000/api/product_types');
