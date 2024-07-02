@@ -179,33 +179,21 @@ export default {
               </div>
             </div>
           </div>
-          <div class="grid grid-row-8">
-            <div class="flex justify-between items-center mb-4">
-              <input v-model="searchKey" @input="fetchData" type="text" placeholder="Search by name or phone" class="p-2 border rounded">
-              <select v-model="limit" @change="fetchData" class="p-2 border rounded">
-                <option value="10">10</option>
-                <option value="20">20</option>
-                <option value="50">50</option>
-              </select>
-            </div>
-            <div class="w-full h-[60px] bg-[#0F172A] grid grid-cols-5 items-center justify-evenly text-white p-5">
-              <p>ID</p>
-              <p>Cashier</p>
-              <p>Role</p>
-              <p>Contact</p>
-              <p>Date</p>
-            </div>
-            <div v-for="user in users.data" :key="user.id" class="w-full h-[60px] p-5 border border-b-[#D9D9D9] grid grid-cols-5 items-center justify-evenly text-black font-bold">
-              <p>{{ user.id }}</p>
-              <p>{{ user.name }}</p>
-              <p>{{ user.type.name }}</p>
-              <p>{{ user.phone }}</p>
-              <div class="flex items-center space-x-2">
-                <p>{{ user.created_at }}</p>
-                <p>{{ user.is_active ? 'Yes' : 'No' }}</p>
-              </div>
-            </div>
-          </div>
+          <div class="grid grid-row-5">
+            <tr class="w-full h-[60px] bg-[#0F172A] flex justify-around items-center text-white">
+                <th class="text-start">Cashier</th>
+                <th class="text-start">Role</th>
+                <th class="pl-8 text-start">Contact</th>
+                <th class="text-start">Date</th>
+                <th class="text-start"></th>
+                <th class="text-start"></th>
+            </tr>
+            <User v-for="user in users.data" 
+            :key="user.id" :name="user.name" :type_id="user.type_id" :type_name="user.type.name" :phone="user.phone" :date="user.created_at"
+            >
+          </User>
+
+        </div>
         </div>
       </div>
       <Modal :isOpen="isModalOpen" @close="closeModal">
@@ -221,6 +209,7 @@ import Header from '../../components/pages/Header.vue';
 import axios from 'axios';
 import Modal from '../../components/Modal.vue';
 import CreateUser from '../../views/user/createUser.vue';
+import User from '@/components/pages/User.vue';
 
 export default {
   name: "user",
@@ -229,6 +218,7 @@ export default {
     Header,
     Modal,
     CreateUser,
+    User
   },
   data() {
     return {
@@ -240,6 +230,10 @@ export default {
       sort: 'desc',
       isModalOpen: false
     };
+  },
+  mounted() {
+    this.fetchData();
+
   },
   created() {
     this.fetchData();
