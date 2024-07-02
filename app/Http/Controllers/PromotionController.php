@@ -37,7 +37,7 @@ class PromotionController extends MainController
             'discount_percentage' => $request->input('discount_percentage'),
             'start_date' => $request->input('start_date'),
             'end_date' => $request->input('end_date'),
-        ])
+        ]);
 
         return response()->json(['promotion' => $promotion], 201);
     }
