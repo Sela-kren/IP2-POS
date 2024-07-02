@@ -30,8 +30,10 @@ Route::get('/products', [ProductController::class, 'index']);
 Route::post('/products/{id}/addstock', [ProductController::class, 'addStock']);
 Route::post('/products/search', [ProductController::class, 'search']);
 Route::get('/products/all', [ProductController::class, 'show']);
-Route::post('/products/update/{id}', [ProductController::class, 'update']);
+Route::post('/products/update/{id}', [ProductController::class, 'updateP']);
+Route::post('/products/update/{id}', [ProductController::class, 'create']);
 Route::get('products/{id}', [ProductController::class, 'getProductById']);
+Route::get('products/delete/{id}', [ProductController::class, 'delete']);
 
 
 

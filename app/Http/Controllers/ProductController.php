@@ -8,7 +8,23 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 
 class ProductController extends MainController
-{
+{   
+
+    public function delete($id)
+    {
+        // Find the product by ID
+        $product = Product::findOrFail($id);
+
+        // Delete associated promotion if exists
+        // $product->promotion()->delete();
+
+        // Delete the product
+        $product->delete();
+
+        return response()->json(['message' => 'Product deleted successfully']);
+    }
+
+
     public function index()
     {
         $products = Product::all();
@@ -87,12 +103,11 @@ class ProductController extends MainController
     }
     
 
-    public function update(Request $request, $id)
-    {
-        // Validate incoming data
+    public function updateP(Request $request, $id)
+    {   
         $validatedData = $request->validate([
             'code' => 'required|string',
-            'type_id' => 'required|string',
+            'type_id' => 'required|numeric',
             'name' => 'required|string',
             'unit_price' => 'required|numeric',
             'stock' => 'required|integer',
@@ -103,7 +118,9 @@ class ProductController extends MainController
             'end_date' => 'required|date',
             'image' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048', // Image validation rules
         ]);
-    
+        // Validate incoming data
+       
+        // return response()->json(['message' => 'Product and promotion updated successfully']);
         // Find the product to update
         $product = Product::findOrFail($id);
     
@@ -118,7 +135,7 @@ class ProductController extends MainController
             $imagePath = $request->file('image')->store('product_images', 'public');
             $product->image = $imagePath; // Update the 'image' field in the product model
         }
-    
+        
         // Update product attributes
         $product->code = $validatedData['code'];
         $product->type_id = $validatedData['type_id'];
@@ -127,7 +144,7 @@ class ProductController extends MainController
         $product->stock = $validatedData['stock'];
         $product->description = $validatedData['description'];
         $product->save();
-    
+        
         // Update or create promotion
         $promotion = Promotion::where('product_id', $id)->firstOrNew([]);
         $promotion->product_id = $product->id;
@@ -138,8 +155,58 @@ class ProductController extends MainController
         $promotion->save();
     
         return response()->json(['message' => 'Product and promotion updated successfully', 'product' => $product, 'promotion' => $promotion]);
+        
     }
     
+    public function create(Request $request)
+{
+    // Validate incoming request
+    $validatedData = $request->validate([
+        'code' => 'required|string',
+        'type_id' => 'required|numeric',
+        'name' => 'required|string',
+        'unit_price' => 'required|numeric',
+        'stock' => 'required|integer',
+        'description' => 'nullable|string',
+        'promotion_name' => 'nullable|string',
+        'discount_percentage' => 'nullable|integer|min:0|max:100',
+        'start_date' => 'nullable|date',
+        'end_date' => 'nullable|date|after:start_date',
+        'image' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048', // Image validation rules
+    ]);
+
+    // Handle file upload if an image is provided
+    if ($request->hasFile('image')) {
+        $imagePath = $request->file('image')->store('product_images', 'public');
+        $validatedData['image'] = $imagePath; // Update the 'image' field in validated data
+    }
+
+    // Create new product
+    $product = new Product();
+    $product->fill($validatedData); // Mass assignment of validated data to product attributes
+    $product->save(); // Save the product
+
+    // Create promotion if provided
+    if (isset($validatedData['promotion_name'])) {
+        $promotion = new Promotion();
+        $promotion->product_id = $product->id;
+        $promotion->name = $validatedData['promotion_name'];
+        $promotion->discount_percentage = $validatedData['discount_percentage'];
+        $promotion->start_date = $validatedData['start_date'];
+        $promotion->end_date = $validatedData['end_date'];
+        $promotion->save();
+    }
+
+    // Return a response with the created product and HTTP status 201 (Created)
+    return response()->json([
+        'message' => 'Product and promotion created successfully',
+        'product' => $product,
+        'promotion' => $promotion ?? null
+    ], 201);
+}
+
+
+
     public function getProductById($id)
     {
         $product = Product::with(['productType', 'promotion'])->findOrFail($id);
