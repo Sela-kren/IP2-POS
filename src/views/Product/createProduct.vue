@@ -116,7 +116,7 @@
           Promotion Name
         </label>
         <input
-          required
+          
           v-model="promotion.name"
           type="text"
           placeholder="Default Input"
@@ -150,7 +150,7 @@
           Discount Percentage
         </label>
         <input
-          required
+          
           v-model.number="promotion.discount_percentage"
           type="number"
           placeholder="Default Input"
@@ -166,7 +166,7 @@
           Start Date
         </label>
         <input
-          required
+          
           v-model="promotion.start_date" 
           type="date"
           placeholder="Default Input"
@@ -182,7 +182,7 @@
           End Date
         </label>
         <input
-          required
+          
           v-model="promotion.end_date"
           type="date" 
           placeholder="Default Input"

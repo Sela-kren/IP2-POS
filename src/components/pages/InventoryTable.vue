@@ -29,14 +29,12 @@
                 <!-- Your pop-up content goes here -->
                 <div class="w-full h-full flex flex-col justify-evenly gap-2.5">
                     <router-link :to="'/manage/update/' + id" class="flex items-center justify-between px-1">
-                       
-                            <img src="../../assets/images/Group 104.svg" class="w-1/3 h-6" alt="">
-                            <p class="w-2/3 text-sm text-start">Edit Product</p>
-                        
+                        <img src="../../assets/images/Group 104.svg" class="w-1/3 h-6" alt="">
+                        <p class="w-2/3 text-sm text-start">Edit Product</p>
                     </router-link>
-                    <div class="flex items-center justify-between px-1">
+                    <div class="flex items-center justify-between px-1" @click="deleteProduct">
                         <img src="../../assets/images/Group 107.svg" class="w-1/3 h-6" alt="">
-                        <p class="w-2/3 text-sm text-red-500 text-start">Delete</p>
+                        <p class="w-2/3 text-sm text-red-500 text-start cursor-pointer">Delete</p>
                     </div>
                 </div>
             </div>
@@ -92,7 +90,8 @@ export default {
         },
         promotion: {
             type: String,
-            required: false
+            required: false,
+            default: 'N/A'
         },
         startDate: {
             type: String,
@@ -109,6 +108,18 @@ export default {
             console.log('Toggle Popup:', this.showPopup);
             event.stopPropagation(); // Prevent click event from bubbling up to the document
         },
+        async deleteProduct() {
+            try {
+                const response = await axios.get(`http://127.0.0.1:8000/api/products/delete/${this.id}`);
+                console.log('Product deleted:', response.data.message);
+                // Optionally, emit an event to notify the parent component to update the product list
+                // Example:
+                this.$emit('productDeleted'); // Emit an event to notify the parent component to update the list
+                this.showPopup = false; // Close the popup after deletion
+            } catch (error) {
+                console.error('Error deleting product:', error);
+            }
+        },
         handleClickOutside(event) {
             const popup = this.$refs.popup;
             const popupImage = this.$refs.popupImage;
@@ -119,7 +130,7 @@ export default {
         },
         async fetchProductsType() {
             try {
-                const response = await axios.get('http://127.0.0.1:8000/api/product-types/' + this.type_id);
+                const response = await axios.get(`http://127.0.0.1:8000/api/product-types/${this.type_id}`);
                 this.type = response.data;
                 console.log(this.type);
             } catch (error) {

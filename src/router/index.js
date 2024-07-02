@@ -10,7 +10,7 @@ import CreateUser from '../views/user/createUser.vue';
 
 import updateP from '../views/Product/updateProduct.vue';
 import manage from '../views/manageBook.vue';
-
+import createProduct from '@/views/Product/createProduct.vue';
 
 import login from '@/views/login.vue';
 import product from '@/views/Product/Product'
@@ -71,6 +71,10 @@ const routes = [
             path: '',
             component: product,
         },
+        {
+          path: 'create',
+          component: createProduct,
+      },
     ]
   },
 //   {

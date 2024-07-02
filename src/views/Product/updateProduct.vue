@@ -269,39 +269,38 @@ export default {
       }
     },
     async updateProduct() {
-    try {
-    const formData = new FormData();
-    formData.append('code', this.product.code);
-    formData.append('type_id', this.product.type_id);
-    formData.append('name', this.product.name);
-    if (this.product.image) {
-      formData.append('image', this.product.image, this.product.image.name);
-    }
-    formData.append('unit_price', this.product.unit_price);
-    formData.append('stock', this.product.stock);
-    formData.append('description', this.product.description);
-    formData.append('promotion_name', this.promotion.name);
-    formData.append('discount_percentage', this.promotion.discount_percentage);
-    formData.append('start_date', this.promotion.start_date);
-    formData.append('end_date', this.promotion.end_date);
+      try {
+        const formData = new FormData();
+        formData.append('code', this.product.code);
+        formData.append('type_id', this.product.type_id);
+        formData.append('name', this.product.name);
+        if (this.product.image instanceof File) {
+          formData.append('image', this.product.image, this.product.image.name);
+        }
+        formData.append('unit_price', this.product.unit_price);
+        formData.append('stock', this.product.stock);
+        formData.append('description', this.product.description);
+        formData.append('promotion_name', this.promotion.name);
+        formData.append('discount_percentage', this.promotion.discount_percentage);
+        formData.append('start_date', this.promotion.start_date);
+        formData.append('end_date', this.promotion.end_date);
 
-    const response = await axios.post(`http://127.0.0.1:8000/api/products/update/${this.id}`, formData, {
-      headers: {
-        'Content-Type': 'multipart/form-data',
+        const response = await axios.post(`http://127.0.0.1:8000/api/products/update/${this.id}`, formData, {
+          headers: {
+            'Content-Type': 'multipart/form-data',
+          }
+        });
+
+        console.log(response.data); // Log the response for debugging
+        alert('Product updated successfully!');
+      } catch (error) {
+        console.error('Error updating product:', error);
+        if (error.response) {
+          console.log('Validation errors:', error.response.data.errors); // Check Laravel validation errors
+        }
+        alert('Failed to update product. Please try again.');
       }
-    });
-
-    console.log(response.data); // Log the response for debugging
-    alert('Product updated successfully!');
-  } catch (error) {
-    console.error('Error updating product:', error);
-    if (error.response) {
-      console.log('Validation errors:', error.response.data.errors); // Check Laravel validation errors
-    }
-    alert('Failed to update product. Please try again.');
-  }
-  
-  },
+    },
   handleImageUpload(event) {
     const file = event.target.files[0];
     this.product.image = file;
