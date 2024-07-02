@@ -1,14 +1,19 @@
 <template>
-  <div class="flex items-center space-x-2.5">
-                  <svg xmlns="http://www.w3.org/2000/svg" class="w-[24px] h-[24px] text-black text-bold" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="size-6">
-                      <path strokeLinecap="round" strokeLinejoin="round" d="m2.25 12 8.954-8.955c.44-.439 1.152-.439 1.591 0L21.75 12M4.5 9.75v10.125c0 .621.504 1.125 1.125 1.125H9.75v-4.875c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125V21h4.125c.621 0 1.125-.504 1.125-1.125V9.75M8.25 21h8.25" />
-                  </svg>
-                  <svg xmlns="http://www.w3.org/2000/svg" class="w-[20px] h-[20px] text-bold text-black " fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" >
-                      <path stroke-linecap="round" stroke-linejoin="round" d="m8.25 4.5 7.5 7.5-7.5 7.5" />
-                  </svg>
-                  <p class="text-16 font-bold">Inventory</p>
+  <div class="flex justify-between">
+      <div class="flex items-center space-x-2.5">
+                      <svg xmlns="http://www.w3.org/2000/svg" class="w-[24px] h-[24px] text-black text-bold" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="size-6">
+                          <path strokeLinecap="round" strokeLinejoin="round" d="m2.25 12 8.954-8.955c.44-.439 1.152-.439 1.591 0L21.75 12M4.5 9.75v10.125c0 .621.504 1.125 1.125 1.125H9.75v-4.875c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125V21h4.125c.621 0 1.125-.504 1.125-1.125V9.75M8.25 21h8.25" />
+                      </svg>
+                      <svg xmlns="http://www.w3.org/2000/svg" class="w-[20px] h-[20px] text-bold text-black " fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" >
+                          <path stroke-linecap="round" stroke-linejoin="round" d="m8.25 4.5 7.5 7.5-7.5 7.5" />
+                      </svg>
+                      <p class="text-16 font-bold">Inventory</p>
+      </div>
+      <button type="submit" class="flex w-[150px] bg-white text-sm text-gray-800 font-medium  h-[35px]  border-2 border-[#D9D9D9] rounded-md items-center justify-center space-x-4" @click="deletePromotion">
+                    clear promo
+      </button>    
   </div>
-  <div class="w-w-6/12 h-[898px] bg-white mt-4">
+  <div class="w-w-6/12 h-[898px] bg-white mt-4 rounded-t-md">
   <form @submit.prevent="updateProduct" class="flex justify-between px-16 py-10">
     <div class="flex flex-col items-center h-full w-1/2">        
       <img class="w-full object-contain h-[300px] pb-3 bg-slate-50 mt-11" :src="`http://127.0.0.1:8000/storage/${this.product.image}`" alt="">
@@ -222,6 +227,7 @@ export default {
         description: '',
       },
       promotion: {
+        id: '',
         name: '',
         discount_percentage: '',
         start_date: '',
@@ -268,6 +274,17 @@ export default {
         console.error('Error fetching categories:', error);
       }
     },
+    async deletePromotion() {
+      try {
+        const response = await axios.post(`http://127.0.0.1:8000/api/promotion/delete/${this.promotion.id}`);
+        alert('Promotion deleted successfully:', response.data);
+        this.$router.push('/manage');
+
+      } catch (error) {
+        console.error('Error deleting promotion:', error);
+        // Optionally show an error message or handle the error in UI
+      }
+    },
     async updateProduct() {
       try {
         const formData = new FormData();
@@ -293,6 +310,7 @@ export default {
 
         console.log(response.data); // Log the response for debugging
         alert('Product updated successfully!');
+        this.$router.push('/manage');
       } catch (error) {
         console.error('Error updating product:', error);
         if (error.response) {

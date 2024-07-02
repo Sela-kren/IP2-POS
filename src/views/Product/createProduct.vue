@@ -1,5 +1,6 @@
-<template>
-  <div class="flex items-center space-x-2.5">
+<template>  
+  <div class="flex">
+    <div class="flex items-center space-x-2.5">
                   <svg xmlns="http://www.w3.org/2000/svg" class="w-[24px] h-[24px] text-black text-bold" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="size-6">
                       <path strokeLinecap="round" strokeLinejoin="round" d="m2.25 12 8.954-8.955c.44-.439 1.152-.439 1.591 0L21.75 12M4.5 9.75v10.125c0 .621.504 1.125 1.125 1.125H9.75v-4.875c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125V21h4.125c.621 0 1.125-.504 1.125-1.125V9.75M8.25 21h8.25" />
                   </svg>
@@ -7,6 +8,7 @@
                       <path stroke-linecap="round" stroke-linejoin="round" d="m8.25 4.5 7.5 7.5-7.5 7.5" />
                   </svg>
                   <p class="text-16 font-bold">Inventory</p>
+  </div>
   </div>
   <div class="w-w-6/12 h-[898px] bg-white mt-4">
   <form @submit.prevent="updateProduct" class="flex justify-between px-16 py-10">
@@ -196,7 +198,7 @@
       <button class="bg-orange-500 w-full dark:bg-dark-2 border-dark dark:border-dark-2 border  mt-2
       rounded-md inline-flex items-center justify-center py-3 px-7 text-center text-base font-medium 
       text-white hover:bg-body-color hover:border-body-color disabled:bg-gray-3 disabled:border-gray-3 disabled:text-dark-5"
-      type="submit">Update Product</button>
+      type="submit">Create Product</button>
 
   
     </div>
@@ -262,14 +264,15 @@ export default {
     formData.append('start_date', this.promotion.start_date);
     formData.append('end_date', this.promotion.end_date);
 
-    const response = await axios.post(`http://127.0.0.1:8000/api/products/update/${this.id}`, formData, {
+    const response = await axios.post(`http://127.0.0.1:8000/api/products/create`, formData, {
       headers: {
         'Content-Type': 'multipart/form-data',
       }
     });
 
     console.log(response.data); // Log the response for debugging
-    alert('Product updated successfully!');
+      alert('Product updated successfully!');
+      this.$router.push('/manage');
   } catch (error) {
     console.error('Error updating product:', error);
     if (error.response) {
