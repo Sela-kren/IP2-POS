@@ -14,7 +14,13 @@ class PromotionController extends MainController
 
         return response()->json(['promotions' => $promotions], 200);
     }
+    
+    public function getPromotionByid($id)
+    {
+        $promotion = Promotion::where('product_id', $id)->first();
 
+        return response()->json($promotion);
+    }
     public function create(Request $request)
     {
         $request->validate([
@@ -31,7 +37,7 @@ class PromotionController extends MainController
             'discount_percentage' => $request->input('discount_percentage'),
             'start_date' => $request->input('start_date'),
             'end_date' => $request->input('end_date'),
-        ]);
+        ])
 
         return response()->json(['promotion' => $promotion], 201);
     }
@@ -83,7 +89,7 @@ class PromotionController extends MainController
             ]);
         }
     
-        return response()->json(['promotion' => $promotion], 200);
+        return response()->json(['promotions' => $promotion], 200);
     }
     
     // Other methods for updating, deleting, and retrieving promotions...

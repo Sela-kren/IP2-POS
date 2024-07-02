@@ -14,6 +14,8 @@ use Tymon\JWTAuth\Contracts\JWTSubject;
 
 // ===================================================>> Custom Library
 use App\Models\Type;
+use App\Models\Order;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class User extends Authenticatable implements JWTSubject
 {
@@ -37,7 +39,7 @@ class User extends Authenticatable implements JWTSubject
         return $this->belongsTo(Type::class, 'type_id');
     }
 
-    public function orders(): HasMany //1:M
+    public function orders(): HasMany
     {
         return $this->hasMany(Order::class, 'cashier_id');
     }

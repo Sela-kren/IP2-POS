@@ -10,6 +10,7 @@ use App\Http\Controllers\UserController;
 use App\Http\Controllers\Auth\AuthController;
 use App\Http\Controllers\OrderController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Middleware\CorsMiddleware;
 
 Route::get('/user', function (Request $request) {
     return $request->user();
@@ -29,6 +30,10 @@ Route::get('/products', [ProductController::class, 'index']);
 Route::post('/products/{id}/addstock', [ProductController::class, 'addStock']);
 Route::post('/products/search', [ProductController::class, 'search']);
 Route::get('/products/all', [ProductController::class, 'show']);
+Route::post('/products/update/{id}', [ProductController::class, 'update']);
+Route::get('products/{id}', [ProductController::class, 'getProductById']);
+
+
 
 Route::get('/product_types', [ProductTypeController::class, 'index']);
 // Route::post('/product_types/create', [ProductTypeController::class, 'store']);
@@ -39,6 +44,7 @@ Route::get('/product-types/{id}', [ProductTypeController::class, 'show']);
 Route::post('/promotion/manage', [PromotionController::class, 'managePromotion']);
 Route::post('/promotion/{productId}', [PromotionController::class, 'deleteByProductId']);
 Route::get('/promotion', [PromotionController::class, 'getPromotions']);
+Route::get('/promotion/{id}', [PromotionController::class, 'getPromotionByid']);
 Route::get('/promotionHistory', [PromotionHistoryController::class, 'index']);
 
 // Route::get('/users', [UserController::class, 'index'])->name('users.index');
