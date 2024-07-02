@@ -23,9 +23,6 @@
             </a>
           </div>
         </form>
-        <p class="text-center text-gray-500 text-xs">
-          &copy;2023 Your Company. All rights reserved.
-        </p>
       </div>
     </div>
   </template>
@@ -54,6 +51,7 @@
             // Handle successful login, e.g., store the token, redirect to another page, etc.
             console.log('Login successful:', result);
             localStorage.setItem('token', result.access_token);
+            alert(result.message || 'Login sucessfully!');
             this.$router.push('/'); // or any route you want to redirect to
           } else {
             // Handle errors, e.g., show error messages
