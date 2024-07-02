@@ -48,13 +48,20 @@ class UserController extends MainController
         }
 
         // Order Data from Latest ID
-        $data = $data->orderBy('id', 'desc')
+        $data = $data->orderBy('id', 'asc')
 
         // Pagination limited by 10
         ->paginate($req->limit ? $req->limit : 10,);
+        
+        // Get total count of users
+        $totalUsers = User::count();
 
         // Success Response Back to Client
-        return response()->json($data, Response::HTTP_OK);
+        // return response()->json($data, Response::HTTP_OK);
+        return response()->json([
+            'data' => $data,
+            'total_users' => $totalUsers
+        ], Response::HTTP_OK);
     }
 
     public function view($id = 0){

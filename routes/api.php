@@ -54,7 +54,7 @@ Route::get('/promotionHistory', [PromotionHistoryController::class, 'index']);
 
 
 Route::post('/user', [UserController::class, 'create']);
-Route::get('/types', [UserController::class, 'getUserType']);
+Route::get('/user-types/{id}', [UserController::class, 'getUserType']);
 Route::get('/user', [UserController::class, 'getData']); // Read Many Records
 Route::get('user/{id}', [UserController::class, 'view']); // View a Record
 Route::post('user/{id}', [UserController::class, 'update']); // Update Existing Record
