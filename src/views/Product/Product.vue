@@ -54,7 +54,7 @@
   
   
   export default {
-  name: "bookshift",
+  name: "Manage",
   components: {
     SideBar,
     Header,
