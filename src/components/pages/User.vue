@@ -65,7 +65,12 @@
       date: {
         type: String,
         required: false
-      }
+      },
+      image: {
+            type: String,
+            required: true,
+            default: '../../assets/images/default.jpg'
+        },
     },
     data() {
       return {

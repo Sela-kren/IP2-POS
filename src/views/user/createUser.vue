@@ -61,7 +61,7 @@ export default {
         });
         console.log('User created:', response.data.message);
         this.$emit('close'); // Close modal or navigate away
-        this.$router.push({ name: 'user' }); // Navigate to user list
+        this.$router.push('/user');// Navigate to user list
       } catch (error) {
         console.error('Error creating user:', error);
       }
