@@ -241,9 +241,10 @@ export default {
     };
   },
   mounted(){
-    this.fetchCategories();
     this.fetchProduct();
     this.fetchPromtion();
+    this.fetchCategories();
+    
     
   },
   props: ['id'],
@@ -281,7 +282,7 @@ export default {
     },
     async deletePromotion() {
       try {
-        const response = await axios.post(`http://127.0.0.1:8000/api/promotion/delete/${this.promotion.id}`);
+        const response = await axios.post(`http://127.0.0.1:8000/api/promotion/delete/${this.id}`);
         alert('Promotion deleted successfully:', response.data);
         this.$router.push('/manage');
 
