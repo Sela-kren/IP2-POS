@@ -1,17 +1,26 @@
 <template>
-    <div class="w-[220px] h-[340px] border border-[#FF5E01] rounded-[10px] px-4 py-4 flex flex-col text-black ">
-      <img class="img w-[180px] h-[240px]" :src="imageUrl" alt="Product Image">
-      <p class="category flex justify-start mt-1 text-sm">{{type.name}}</p>
-      <p class="title flex justify-start font-bold text-md w-[220px]">{{ name }}</p>
-      <div class="flex justify-between">
-        <div class="flex text-[20px]">
-          <p class="price mt-1 text-[#009C22] text-md">{{ unitPrice }}</p>
-          <p class="price mt-1 ml-1 text-[#009C22] text-md">$</p>
-        </div>
-        <font-awesome-icon icon="cart-plus" class="mt-1 text-[#009C22] w-[25px] h-[25px]" />
+  <div class=" h-[350px] border rounded-[10px] px-4 py-4 flex flex-col text-black drop-shadow-md transform scale-[0.75] md:scale-[1] ">
+    <img class="img bg-slate-50 h-3/4 object-scale-down" :src="imageUrl" alt="Product Image">
+    <p class="category flex justify-start mt-1 text-sm">{{ type.name }}</p>
+    <p class="title flex justify-start font-bold text-md w-[220px]">{{ name }}</p>
+    <div class="flex justify-between ">
+      <div class="flex text-[20px]">
+        <p class="price mt-1 text-[#009C22] text-md">{{ unitPrice }}</p>
+        <p class="price mt-1 ml-1 text-[#009C22] text-md">$</p>
       </div>
+      <font-awesome-icon icon="cart-plus" class="mt-1 text-[#009C22] w-[25px] h-[25px]" />
     </div>
-  </template>
+  </div>
+</template>
+
+<!-- <style scoped>
+  @media (min-width: 768px) {
+    .scale-[0.75] {
+      transform: scale(0.75);
+    }
+  }
+</style> -->
+
 
   <script>
   import { RouterLink, RouterView } from 'vue-router';
