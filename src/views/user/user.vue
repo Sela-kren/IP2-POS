@@ -148,11 +148,7 @@ export default {
 
 
 <template>
-  <div class="w-screen h-full flex">
-    <SideBar></SideBar>
-    <div class="w-full">
-      <Header></Header>
-      <div class="flex-1 bg-[#D9D9D9] px-8 flex-col pt-4">
+     
         <div class="flex items-center space-x-2.5">
           <svg xmlns="http://www.w3.org/2000/svg" class="w-[30px] h-[30px] text-black text-bold" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="size-6">
             <path strokeLinecap="round" strokeLinejoin="round" d="m2.25 12 8.954-8.955c.44-.439 1.152-.439 1.591 0L21.75 12M4.5 9.75v10.125c0 .621.504 1.125 1.125 1.125H9.75v-4.875c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125V21h4.125c.621 0 1.125-.504 1.125-1.125V9.75M8.25 21h8.25" />
@@ -163,6 +159,7 @@ export default {
           <p class="text-16 font-bold">User</p>
         </div>
         <div class="w-w-6/12 h-[898px] bg-white mt-4 flex flex-col">
+         
           <div class="flex justify-between px-4 py-4">
             <div class="flex font-bold">
               <p class="text-[16px]">{{totalUsers}}</p>
@@ -180,6 +177,7 @@ export default {
             </div>
           </div>
           <div class="grid grid-row-5">
+           
             <tr class="w-full h-[60px] bg-[#0F172A] flex justify-around items-center text-white">
                 <th class="text-start">Cashier</th>
                 <th class="text-start">Role</th>
@@ -188,19 +186,17 @@ export default {
                 <th class="text-start"></th>
                 <th class="text-start"></th>
             </tr>
-            <User v-for="user in users.data" 
-            :key="user.id" :name="user.name" :type_id="user.type_id" :type_name="user.type.name" :phone="user.phone" :date="user.created_at"
-            >
-          </User>
+            <User v-for="user in users" 
+              :key="user.id" :id="user.id" :name="user.name" :type_id="user.type_id" :type_name="user.type.name" :phone="user.phone" :date="user.created_at"
+              >
+            </User>
 
         </div>
         </div>
-      </div>
+      
       <Modal :isOpen="isModalOpen" @close="closeModal">
         <CreateUser @close="closeModal"></CreateUser>
       </Modal>
-    </div>
-  </div>
 </template>
 
 <script>
@@ -210,6 +206,8 @@ import axios from 'axios';
 import Modal from '../../components/Modal.vue';
 import CreateUser from '../../views/user/createUser.vue';
 import User from '@/components/pages/User.vue';
+
+import { RouterLink } from 'vue-router';
 
 export default {
   name: "user",
@@ -233,7 +231,6 @@ export default {
   },
   mounted() {
     this.fetchData();
-
   },
   created() {
     this.fetchData();

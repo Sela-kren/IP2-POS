@@ -1,4 +1,5 @@
 <template>
+  {{ this.id }}
   <div class="flex flex-col w-[626px] h-[554px] pl-5">
     <h2 class="text-2xl font-bold mb-4">{{ editing ? 'Edit User' : 'Create User' }}</h2>
     <div class="w-[576px] h-[468px] flex flex-row pt-10 justify-center">
@@ -64,6 +65,7 @@ export default {
       message: ''
     };
   },
+  props: ['id'],
   methods: {
     submitForm() {
       axios.post(`http://127.0.0.1:8000/api/user/${this.userId}`, this.formData)

@@ -7,7 +7,7 @@ import orderpage from '../views/orderpage.vue';
 
 import user from '../views/user/user.vue';
 import CreateUser from '../views/user/createUser.vue';
-import UpdateUser from '../views/user/updateUser.vue';
+import UpdateUser from '@/views/user/updateUser.vue';
 
 import updateP from '../views/Product/updateProduct.vue';
 import manage from '../views/manageBook.vue';
@@ -15,6 +15,9 @@ import createProduct from '@/views/Product/createProduct.vue';
 
 import login from '@/views/login.vue';
 import product from '@/views/Product/Product'
+import manageUser from '@/views/manageUser.vue';
+import User from '../views/user/user.vue';
+
 
 const routes = [
   {
@@ -45,12 +48,17 @@ const routes = [
   {
     path: '/user',
     name: 'user',
-    component: user,
+    component: manageUser,
     children: [
       {
         path: 'createUser',
         name: 'createUser',
         component: CreateUser,
+      },
+      {
+        path: '',
+        name: 'user',
+        component: User,
       },
       {
         path: 'updateUser/:id',

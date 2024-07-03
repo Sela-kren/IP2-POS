@@ -11,7 +11,7 @@
     <div class="w-w-6/12 h-[898px] bg-white mt-4 flex  flex-col">
         <div class="flex justify-between px-4 py-4">
             <div class="flex font-bold pt-2">
-                <p class="text-[16px]">7</p>
+                <p class="text-[16px]">{{ this.filteredProducts.length }}</p>
                 <p class="text-[16px] ml-4">Inventory</p>
             </div>
             <router-link :to="'/manage/create'" class="flex w-[150px] h-[45px] text-[#D9D9D9] border-2 border-[#D9D9D9] rounded-md items-center justify-center space-x-4">
@@ -23,7 +23,7 @@
             </router-link>    
         </div>
         <div class="grid grid-row-8">
-            <tr class="w-full h-[60px] bg-[#0F172A] flex items-center text-white">
+            <tr class="w-full h-[60px] bg-[#0F172A]  flex items-center text-white">
                 <th class="w-3/12 ">Category</th>
                 <th class="w-3/12 text-start">Product_id</th>
                 <th class="w-3/12 text-start">Title</th>
@@ -40,7 +40,7 @@
             >
             </InventoryTable>
 
-        </div>
+          </div>
                 
     </div>
 </template>

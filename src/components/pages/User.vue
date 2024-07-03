@@ -20,10 +20,10 @@
                 <div v-if="showPopup" class="w-[160px] h-[88px] absolute top-6 right-4 bg-white border py-2 px-3 shadow-lg z-10 rounded-md" ref="popup">
                     <div class="w-full h-full flex flex-col justify-evenly gap-2.5">
                         <!-- Open modal to edit user -->
-                        <div @click="openModal" class="flex justify-center items-center text-[20px] text-[#948984] cursor-pointer">
+                        <router-link :to="'/user/updateUser/' + this.id" class="flex justify-center items-center text-[20px] text-[#948984] cursor-pointer">
                             <img src="../../assets/images/Group 104.svg" class="w-1/3 h-6" alt="">
                             <p class="w-2/3 text-sm text-start">Edit User</p>
-                        </div>
+                        </router-link>
                         <!-- Delete user -->
                         <div class="flex items-center justify-between px-1" @click="deleteUser">
                             <img src="../../assets/images/Group 107.svg" class="w-1/3 h-6" alt="">
