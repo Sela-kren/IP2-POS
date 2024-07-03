@@ -21,6 +21,8 @@ class CreateOrderDetailsTable extends Migration
             $table->double('unit_price')->nullable();
             $table->integer('quantity')->unsigned()->default(0);
 
+            $table->integer('discount')->unsigned()->default(0);
+            
             $table->timestamps();
             $table->softDeletes();
         });

@@ -47,18 +47,18 @@ class Promotion extends Model
         });
 
        
-        // static::deleted(function ($promotion) {
-        //     // Create a new promotion history record when the promotion is deleted
-        //     PromotionHistory::create([
-        //         'promotion_id' => $promotion->id,
-        //         'product_id' => $promotion->product_id,
-        //         'name' => $promotion->name,
-        //         'discount_percentage' => $promotion->discount_percentage,
-        //         'start_date' => $promotion->start_date,
-        //         'end_date' => $promotion->end_date,
-        //         'deleted_at' => now() // Record the deletion timestamp
-        //     ]);
-        // });
+        static::deleted(function ($promotion) {
+            // Create a new promotion history record when the promotion is deleted
+            PromotionHistory::create([
+                'promotion_id' => $promotion->id,
+                'product_id' => $promotion->product_id,
+                'name' => $promotion->name,
+                'discount_percentage' => $promotion->discount_percentage,
+                'start_date' => $promotion->start_date,
+                'end_date' => $promotion->end_date,
+                'deleted_at' => now() // Record the deletion timestamp
+            ]);
+        });
         
     }
 
