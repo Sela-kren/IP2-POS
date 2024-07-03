@@ -1,5 +1,5 @@
 <template>
-  <div class=" h-[350px] border rounded-[10px] px-4 py-4 flex flex-col text-black drop-shadow-md transform scale-[0.75] md:scale-[1] ">
+  <div class=" h-[350px] border rounded-[10px] px-4 py-4 flex flex-col text-black transform scale-[0.75] md:scale-[1] ">
     <img class="img bg-slate-50 h-3/4 object-scale-down" :src="imageUrl" alt="Product Image">
     <p class="category flex justify-start mt-1 text-sm">{{ type.name }}</p>
     <p class="title flex justify-start font-bold text-md w-[220px]">{{ name }}</p>

@@ -186,7 +186,7 @@ export default {
                 <th class="text-start"></th>
                 <th class="text-start"></th>
             </tr>
-            <User v-for="user in users" 
+            <User v-for="user in users.data" 
               :key="user.id" :id="user.id" :name="user.name" :type_id="user.type_id" :type_name="user.type.name" :phone="user.phone" :date="user.created_at"
               >
             </User>
@@ -220,7 +220,7 @@ export default {
   },
   data() {
     return {
-      users: {},
+      users: [],
       totalUsers: 0,
       searchKey: '',
       limit: 10,
