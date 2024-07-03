@@ -48,6 +48,7 @@ Route::post('/promotion/delete/{productId}', [PromotionController::class, 'delet
 Route::get('/promotion', [PromotionController::class, 'getPromotions']);
 Route::get('/promotion/{id}', [PromotionController::class, 'getPromotionByid']);
 Route::get('/promotionHistory', [PromotionHistoryController::class, 'index']);
+Route::get('/promotionHistory/{productId}', [PromotionHistoryController::class, 'getPromotionHistoryByProductId']);
 
 // Route::get('/users', [UserController::class, 'index'])->name('users.index');
 // Route::post('/users', [UserController::class, 'store'])->name('users.create');
@@ -64,3 +65,5 @@ Route::delete('user/{id}', [UserController::class, 'delete']); // Delete a recor
 
 Route::get('/getproduct', [OrderController::class, 'getProducts']);
 Route::post('/orders', [OrderController::class, 'makeOrder']);
+
+Route::post('/product-types/create', [ProductTypeController::class, 'store']);

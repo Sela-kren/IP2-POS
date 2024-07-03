@@ -30,7 +30,7 @@ Route::post('/upload', [ProductController::class, 'store']);
 // Route::post('/products', [ProductController::class, 'createProducts']);
 
 Route::get('/product-types/create', [ProductTypeController::class, 'create']);
-Route::post('/product-types/create', [ProductTypeController::class, 'store']);
+
 
 Route::get('/order', function () {
     return view('order');
