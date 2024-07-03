@@ -54,12 +54,18 @@ Route::get('/promotionHistory', [PromotionHistoryController::class, 'index']);
 // Route::put('/users/{id}', [UserController::class, 'update'])->name('users.update');
 // Route::delete('/users/{id}', [UserController::class, 'destroy'])->name('users.destroy');
 
+// Route::middleware('jwt.auth')->group(function () {
+//     Route::get('/user', [UserController::class, 'getData']); // Read Many Records
+// });
+// Route::middleware('auth:api')->get('/user', function (Request $request) {
+//     return $request->user();
+// });
 
 Route::post('/user', [UserController::class, 'create']);
 Route::get('/user-types/{id}', [UserController::class, 'getUserType']);
 Route::get('/user', [UserController::class, 'getData']); // Read Many Records
 Route::get('user/{id}', [UserController::class, 'view']); // View a Record
-Route::post('user/{id}', [UserController::class, 'update']); // Update Existing Record
+Route::post('user/update/{id}', [UserController::class, 'update']); // Update Existing Record
 Route::delete('user/{id}', [UserController::class, 'delete']); // Delete a record
 
 Route::get('/getproduct', [OrderController::class, 'getProducts']);

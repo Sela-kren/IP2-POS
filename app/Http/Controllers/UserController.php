@@ -230,31 +230,58 @@ class UserController extends MainController
 
         }
     }
-    public function delete($id = 0){
+    // public function delete($id = 0){
 
-        // ===>> Get Data from DB
-        $data = User::find($id);
+    //     // ===>> Get Data from DB
+    //     $data = User::find($id);
 
-        //====>> Check if Data is Valid
-        if ($data) { // Yes
+    //     //====>> Check if Data is Valid
+    //     if ($data) { // Yes
 
-            // Delete Data from DB
-            $data->delete();
+    //         // Delete Data from DB
+    //         $data->delete();
 
-            // ===>> Success Response Back to Client
+    //         // ===>> Success Response Back to Client
+    //         return response()->json([
+    //             'status'    => 'Successful!',
+    //             'message'   => 'Data has been deleted!',
+    //         ], Response::HTTP_OK);
+
+    //     } else { // No
+
+    //         // ===>> Failed Response Back to Client
+    //         return response()->json([
+    //             'status'    => 'Failed!',
+    //             'message'   => 'Wrong Data!',
+    //         ], Response::HTTP_BAD_REQUEST);
+
+    //     }
+    // }
+    public function delete($id)
+    {
+        // Find the user by ID
+        $user = User::find($id);
+
+        if (!$user) {
             return response()->json([
-                'status'    => 'Successful!',
-                'message'   => 'Data has been deleted!',
+                'status' => 'Failed!',
+                'message' => 'User not found.'
+            ], Response::HTTP_NOT_FOUND);
+        }
+
+        try {
+            // Delete the user
+            $user->delete();
+
+            return response()->json([
+                'status' => 'Successful!',
+                'message' => 'User deleted successfully.'
             ], Response::HTTP_OK);
-
-        } else { // No
-
-            // ===>> Failed Response Back to Client
+        } catch (\Exception $e) {
             return response()->json([
-                'status'    => 'Failed!',
-                'message'   => 'Wrong Data!',
-            ], Response::HTTP_BAD_REQUEST);
-
+                'status' => 'Failed!',
+                'message' => 'Error deleting user.'
+            ], Response::HTTP_INTERNAL_SERVER_ERROR);
         }
     }
 }
