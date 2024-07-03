@@ -9,9 +9,14 @@
                       </svg>
                       <p class="text-16 font-bold">Inventory</p>
       </div>
-      <button type="submit" class="flex w-[150px] bg-white text-sm text-gray-800 font-medium  h-[35px]  border-2 border-[#D9D9D9] rounded-md items-center justify-center space-x-4" @click="deletePromotion">
-                    clear promo
-      </button>    
+      <div class="flex gap-2">
+        <router-link :to="'/manage/promotion/'+id"type="submit" class="flex w-[150px] bg-white text-sm text-gray-800 font-medium  h-[35px]  border-2 border-[#D9D9D9] rounded-md items-center justify-center space-x-4" >
+                    History
+        </router-link> 
+        <button type="submit" class="flex w-[150px] bg-white text-sm text-gray-800 font-medium  h-[35px]  border-2 border-[#D9D9D9] rounded-md items-center justify-center space-x-4" @click="deletePromotion">
+                      clear promo
+        </button>    
+      </div>
   </div>
   <div class="w-w-6/12 h-[898px] bg-white mt-4 rounded-t-md">
   <form @submit.prevent="updateProduct" class="flex justify-between px-16 py-10">
