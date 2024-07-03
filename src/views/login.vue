@@ -139,6 +139,7 @@ export default {
           // Handle successful login, e.g., store the token, redirect to another page, etc.
           console.log('Login successful:', result);
           localStorage.setItem('token', result.access_token);
+          localStorage.setItem('user', JSON.stringify(result.user));
           alert(result.message || 'Login sucessfully!');
           this.$router.push('/'); // or any route you want to redirect to
         } else {
