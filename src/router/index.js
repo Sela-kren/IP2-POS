@@ -12,6 +12,8 @@ import UpdateUser from '@/views/user/updateUser.vue';
 import updateP from '../views/Product/updateProduct.vue';
 import manage from '../views/manageBook.vue';
 import createProduct from '@/views/Product/createProduct.vue';
+import createCategory from '../views/Product/createCategory.vue';
+import Histroy from '../views/Product/History.vue'
 
 import login from '@/views/login.vue';
 import product from '@/views/Product/Product'
@@ -86,13 +88,26 @@ const routes = [
             }),
         },
         {
+          path: 'promotion/:id',
+          name: 'promotion hisotry',
+          component: Histroy,
+          props: (route) => ({
+              id: route.params.id,
+              // Other props as needed
+          }),
+        },
+        {
             path: '',
             component: product,
         },
         {
           path: 'create',
           component: createProduct,
-      },
+        },
+        {
+          path: 'createCategory',
+          component: createCategory,
+        },
     ]
   },
 //   {
