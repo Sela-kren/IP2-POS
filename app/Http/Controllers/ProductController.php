@@ -16,7 +16,9 @@ class ProductController extends MainController
         $product = Product::findOrFail($id);
 
         // Delete associated promotion if exists
-        // $product->promotion()->delete();
+        if ($product->promotion) {
+            $product->promotion->delete();
+        }
 
         // Delete the product
         $product->delete();
@@ -25,6 +27,7 @@ class ProductController extends MainController
     }
 
 
+    
     public function index()
     {
         $products = Product::all();
@@ -159,51 +162,51 @@ class ProductController extends MainController
     }
     
     public function create(Request $request)
-{
-    // Validate incoming request
-    $validatedData = $request->validate([
-        'code' => 'required|string',
-        'type_id' => 'required|numeric',
-        'name' => 'required|string',
-        'unit_price' => 'required|numeric',
-        'stock' => 'required|integer',
-        'description' => 'nullable|string',
-        'promotion_name' => 'nullable|string',
-        'discount_percentage' => 'nullable|integer|min:0|max:100',
-        'start_date' => 'nullable|date',
-        'end_date' => 'nullable|date|after:start_date',
-        'image' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048', // Image validation rules
-    ]);
+    {
+        // Validate incoming request
+        $validatedData = $request->validate([
+            'code' => 'required|string',
+            'type_id' => 'required|numeric',
+            'name' => 'required|string',
+            'unit_price' => 'required|numeric',
+            'stock' => 'required|integer',
+            'description' => 'nullable|string',
+            'promotion_name' => 'nullable|string',
+            'discount_percentage' => 'nullable|integer|min:0|max:100',
+            'start_date' => 'nullable|date',
+            'end_date' => 'nullable|date|after:start_date',
+            'image' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048', // Image validation rules
+        ]);
 
-    // Handle file upload if an image is provided
-    if ($request->hasFile('image')) {
-        $imagePath = $request->file('image')->store('product_images', 'public');
-        $validatedData['image'] = $imagePath; // Update the 'image' field in validated data
+        // Handle file upload if an image is provided
+        if ($request->hasFile('image')) {
+            $imagePath = $request->file('image')->store('product_images', 'public');
+            $validatedData['image'] = $imagePath; // Update the 'image' field in validated data
+        }
+
+        // Create new product
+        $product = new Product();
+        $product->fill($validatedData); // Mass assignment of validated data to product attributes
+        $product->save(); // Save the product
+
+        // Create promotion if provided
+        if (isset($validatedData['promotion_name'])) {
+            $promotion = new Promotion();
+            $promotion->product_id = $product->id;
+            $promotion->name = $validatedData['promotion_name'];
+            $promotion->discount_percentage = $validatedData['discount_percentage'];
+            $promotion->start_date = $validatedData['start_date'];
+            $promotion->end_date = $validatedData['end_date'];
+            $promotion->save();
+        }
+
+        // Return a response with the created product and HTTP status 201 (Created)
+        return response()->json([
+            'message' => 'Product and promotion created successfully',
+            'product' => $product,
+            'promotion' => $promotion ?? null
+        ], 201);
     }
-
-    // Create new product
-    $product = new Product();
-    $product->fill($validatedData); // Mass assignment of validated data to product attributes
-    $product->save(); // Save the product
-
-    // Create promotion if provided
-    if (isset($validatedData['promotion_name'])) {
-        $promotion = new Promotion();
-        $promotion->product_id = $product->id;
-        $promotion->name = $validatedData['promotion_name'];
-        $promotion->discount_percentage = $validatedData['discount_percentage'];
-        $promotion->start_date = $validatedData['start_date'];
-        $promotion->end_date = $validatedData['end_date'];
-        $promotion->save();
-    }
-
-    // Return a response with the created product and HTTP status 201 (Created)
-    return response()->json([
-        'message' => 'Product and promotion created successfully',
-        'product' => $product,
-        'promotion' => $promotion ?? null
-    ], 201);
-}
 
 
 

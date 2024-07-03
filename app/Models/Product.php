@@ -17,7 +17,7 @@ class Product extends Model
     use HasFactory;
 
     protected $fillable = [
-        'type_id', 'code', 'name', 'image', 'unit_price', 'description', 'stock'
+        'type_id', 'code', 'name', 'image', 'unit_price', 'description', 'stock','product_name'
     ];
 
     public function orderDetails(): HasMany
@@ -34,4 +34,5 @@ class Product extends Model
     {
         return $this->hasOne(Promotion::class, 'product_id');
     }
+
 }
