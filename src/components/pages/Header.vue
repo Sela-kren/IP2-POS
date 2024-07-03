@@ -24,7 +24,7 @@
                     <div class="w-[200px] justyfy-end "> 
                         <div class="flex items-center justify-start space-x-15 pl-[50px]" >
                             <img class="w-10 h-10 rounded-full border-2 border-gray-50" src="../../assets/images/len_profile.jpg" alt="">
-                            <div class="font-semibold dark:text-white text-left">
+                            <div class="font-semibold dark:text-black text-left">
                                 <div>CHAB Sreylen</div>
                                 <div class="text-xs text-gray-500 dark:text-gray-400">Admin</div>
                             </div>

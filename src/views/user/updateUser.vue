@@ -9,14 +9,11 @@
       </svg>
       <p class="text-16 font-bold">Inventory</p>
     </div>
-    <button type="submit" class="flex w-[150px] bg-white text-sm text-gray-800 font-medium h-[35px] border-2 border-[#D9D9D9] rounded-md items-center justify-center space-x-4" @click="deletePromotion">
-      Clear Promo
-    </button>
   </div>
   <div class="w-w-6/12 h-[898px] bg-white mt-4 rounded-t-md">
     <form @submit.prevent="updateUser" class="flex justify-between px-16 py-10">
       <div class="flex flex-col items-center h-full w-1/2">
-        <img class="w-full object-contain h-[300px] pb-3 bg-slate-50 mt-11" :src="`http://127.0.0.1:8000/storage/${user.image}`" alt="">
+        <img class="w-full object-contain h-[300px] pb-3 bg-slate-50 mt-11" :src="`http://127.0.0.1:8000${user.avatar}`" alt="">
         <div class="mb-3 w-full">
           <label for="" class="mb-[8px] block text-sm font-medium">Image</label>
           <input type="file" class="w-full cursor-pointer rounded-lg border-[1.5px] border-stroke dark:border-dark-3 font-medium text-body-color dark:text-dark-6 outline-none transition file:mr-2 file:border-collapse file:cursor-pointer file:border-0 file:border-r file:border-solid file:border-stroke dark:file:border-dark-3 file:bg-[#F5F7FD] dark:file:bg-dark-2 file:py-3 file:px-3 file:text-sm file:text-body-color dark:file:text-dark-6 file:hover:bg-primary file:hover:bg-opacity-10 focus:border-primary active:border-primary disabled:cursor-default disabled:bg-[#F5F7FD]" @change="handleImageUpload" accept="image/*" />
@@ -48,7 +45,10 @@
           <label for="" class="mb-[8px] block text-sm font-medium">Is Active</label>
           <input required v-model="user.is_active" type="text" placeholder="Default Input" class="w-full bg-transparent rounded-md border border-stroke dark:border-dark-3 py-[10px] px-5 text-dark-6 outline-none transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-gray-2 disabled:border-gray-2 focus:outline-none focus:border-orange-500 focus:ring-orange-500" />
         </div>
+        
+        <button class="bg-gray-500 w-full dark:bg-dark-2 border-dark dark:border-dark-2 border mt-2 rounded-md inline-flex items-center justify-center py-3 px-7 text-center text-base font-medium text-white hover:bg-body-color hover:border-body-color disabled:bg-gray-3 disabled:border-gray-3 disabled:text-dark-5" type="button" @click="cancel">Cancel</button>
         <button class="bg-orange-500 w-full dark:bg-dark-2 border-dark dark:border-dark-2 border mt-2 rounded-md inline-flex items-center justify-center py-3 px-7 text-center text-base font-medium text-white hover:bg-body-color hover:border-body-color disabled:bg-gray-3 disabled:border-gray-3 disabled:text-dark-5" type="submit">Update user</button>
+
       </div>
     </form>
   </div>
@@ -69,18 +69,11 @@ export default {
         type_id: '',
         type_name: '',
         name: '',
-        image: null,
+        avatar: '../../assets/images/default.jpg',
         email: '',
         phone: '',
         is_active: '',
       },
-      promotion: {
-        id: '',
-        name: '',
-        discount_percentage: '',
-        start_date: '',
-        end_date: ''
-      }
     };
   },
   mounted(){
@@ -92,23 +85,14 @@ export default {
     async fetchUser() {
       try {
         const response = await axios.get(`http://127.0.0.1:8000/api/user/${this.id}`, {
-          params: {
-            exclude: 'promotion'  // Assuming your Laravel API supports this parameter
-          }
+    
         });
         this.user = response.data;
       } catch (error) {
         console.error('Error fetching user:', error);
       }
     },
-    async fetchPromtion(){
-      try {
-        const response = await axios.get(`http://127.0.0.1:8000/api/promotion/${this.id}`);
-        this.promotion = response.data;
-      } catch (error) {
-        console.error('Error fetching user:', error);
-      }
-    },
+    
     async fetchCategories() {
       try {
         const response = await axios.get('http://127.0.0.1:8000/api/user_types');
@@ -148,11 +132,15 @@ export default {
         }
         alert('Failed to update user. Please try again.');
       }
+      
     },
     handleImageUpload(event) {
       const file = event.target.files[0];
       this.user.image = file;
     },
+    cancel() {
+      this.$router.push('/user'); // Navigate back to the user list
+    }
   }
 };
 </script>
@@ -160,4 +148,3 @@ export default {
 <style scoped>
 /* Add your component-specific styles here */
 </style>
-
