@@ -73,3 +73,6 @@ Route::get('/getproduct', [OrderController::class, 'getProducts']);
 Route::post('/orders', [OrderController::class, 'makeOrder']);
 
 Route::post('/product-types/create', [ProductTypeController::class, 'store']);
+
+
+Route::get('/profile', [ProfileController::class, 'view']); // Get Data
