@@ -9,7 +9,7 @@
     <!-- search bar -->
     <div class="w-[calc(100%-100px)] flex py-[10px]">
       <div class="w-[calc(100%-200px)] flex justify-center">
-        <form class="flex items-center w-[500px]">
+        <!-- <form class="flex items-center w-[500px]">
           <label for="voice-search" class="sr-only text-gray-400">Search</label>
           <div class="relative w-full">
             <div class="flex absolute inset-y-0 left-0 items-center mt-[10px] pl-3 pointer-events-none">
@@ -19,17 +19,17 @@
             </div>
             <input type="text" name="" id="" class="h-[40px] w-full bg-[#DADADA] border-none border-gray-300 text-gray-900 text-sm rounded-[50px] focus:ring-blue-500 focus:border-blue-500 block pl-10">
           </div>
-        </form>
+        </form> -->
       </div>
-      <div class="w-[200px] justify-end">
+      <div class="w-[400px] justify-end">
         <div class="flex items-center justify-start space-x-15 pl-[50px]">
           <img class="w-10 h-10 rounded-full border-2 border-gray-50" :src="`http://127.0.0.1:8000${users.avatar}`" alt="">
           <div class="font-semibold dark:text-black text-left">
-            <h1 v-if="users.name">Welcome, {{ users.name }}</h1>
+            <h1 class="truncate"v-if="users.name">Welcome, {{ users.name }}</h1>
             <div class="text-xs text-gray-500 dark:text-gray-400">{{users.email}}</div>
           </div>
           <!-- Logout Button -->
-          <button @click="logout" class="ml-4 bg-red-500 text-white px-4 py-2 rounded">Logout</button>
+          <button @click="logout" class="ml-4 bg-orange-500 text-white px-4 py-2 rounded">Logout</button>
         </div>
       </div>
     </div>

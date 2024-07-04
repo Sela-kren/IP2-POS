@@ -7,7 +7,7 @@
                       <svg xmlns="http://www.w3.org/2000/svg" class="w-[20px] h-[20px] text-bold text-black " fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" >
                           <path stroke-linecap="round" stroke-linejoin="round" d="m8.25 4.5 7.5 7.5-7.5 7.5" />
                       </svg>
-                      <p class="text-16 font-bold">Inventory</p>
+                      <p class="text-16 font-bold">Inventory / update</p>
       </div>
       <div class="flex gap-2">
         <router-link :to="'/manage/promotion/'+id"type="submit" class="flex w-[150px] bg-white text-sm text-gray-800 font-medium  h-[35px]  border-2 border-[#D9D9D9] rounded-md items-center justify-center space-x-4" >

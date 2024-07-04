@@ -7,7 +7,7 @@
                   <svg xmlns="http://www.w3.org/2000/svg" class="w-[20px] h-[20px] text-bold text-black " fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" >
                       <path stroke-linecap="round" stroke-linejoin="round" d="m8.25 4.5 7.5 7.5-7.5 7.5" />
                   </svg>
-                  <p class="text-16 font-bold">Inventory</p>
+                  <p class="text-16 font-bold">Inventory / create</p>
   </div>
   </div>
   <div class="w-w-6/12 h-[898px] bg-white mt-4">
