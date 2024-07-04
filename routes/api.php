@@ -62,7 +62,7 @@ Route::get('/promotionHistory/{productId}', [PromotionHistoryController::class, 
 //     return $request->user();
 // });
 
-Route::post('/user', [UserController::class, 'create'])->middleware('adminMiddleware');
+Route::post('/user', [UserController::class, 'create'])->middleware('adminMiddleware'); 
 Route::get('/user-types/{id}', [UserController::class, 'getUserType']);
 Route::get('/user', [UserController::class, 'getData'])->middleware('adminMiddleware'); // Read Many Records
 Route::get('user/{id}', [UserController::class, 'view'])->middleware('adminMiddleware'); // View a Record

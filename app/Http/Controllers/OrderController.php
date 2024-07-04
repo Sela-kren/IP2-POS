@@ -78,43 +78,44 @@ class OrderController extends MainController
         foreach ($cart as $productId => $quantity) {
             // ===>> Find Each Product by ID
             $product = Product::find($productId);
+            
 
-            // ===>> Check if product is valid
-            if ($product) { // Yes
-                $unitPrice = $product->unit_price;
+            $unitPrice = $product->unit_price;
                 if ($product->promotion) {
                     $discountPercentage = $product->promotion->discount_percentage;
                     $unitPrice -= ($unitPrice * $discountPercentage) / 100;
                 }
+            // ===>> Check if product is valid
+            if ($product) { // Yes
+                
                 // ===>> Add New Record to Array
                 $details[] = [
                     'order_id'      => $order->id,
                     'product_id'    => $productId,
                     'quantity'      => $quantity,
                     'unit_price'    => $product->unit_price,
-                    'discount'      => $discountPercentage
+                    'discount'    => $discountPercentage,
                 ];
 
                 // ===>> Calculate the total Price
-                
                 $totalPrice +=  $quantity * $unitPrice;
                 $totalStock = $product->stock - $quantity;
+
+
+                // ===>> Save Order Detail to DB
                 OrderDetail::insert($details);
 
-                
-                
-
-                $product->stock = $totalStock;
-                $product->save();
-
+                // ===>> Update Order
+                $order->total_price     = $totalPrice;
+                $order->save();
             }
         }
-        // ===>> Update Order
-        $order->total_price     = $totalPrice;
-        $order->save();
 
-        // ===>> Save Order Detail to DB
-        
+       
+
+        $product->stock = $totalStock;
+        $product->save();
+
         // ===> Get Data for Client Reponse to view the order in Popup.
         // $orderData = Order::select('*')
         // ->with([
