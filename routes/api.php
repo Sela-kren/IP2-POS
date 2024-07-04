@@ -72,7 +72,7 @@ Route::delete('user/{id}', [UserController::class, 'delete']); // Delete a recor
 
 Route::get('/getproduct', [OrderController::class, 'getProducts']);
 Route::post('/orders', [OrderController::class, 'makeOrder']);
-Route::get('/o/{id}', [OrderController::class, 'getOrderDetails']);
+Route::get('/getallorder', [OrderController::class, 'getOrderDetails']);
 
 Route::post('/product-types/create', [ProductTypeController::class, 'store']);
 

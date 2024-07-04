@@ -21,18 +21,20 @@ use App\Models\OrderDetail;
 class OrderController extends MainController
 {
 
-    public function getOrderDetails($id)
+    public function getOrderDetails()
     {
-        $order = Order::with(['orderDetails.product:id,name,image'])
-                    ->find($id);
-    
-        if (!$order) {
-            return response()->json(['message' => 'Order not found'], 404);
-        }
-    
-        return response()->json(['order' => $order]);
+        $orders = Order::with([
+            'cashier:id,name', // Include cashier's id and name
+            'orderDetails.product:id,name,image' // Include product details
+        ])->orderBy('created_at', 'desc')->get();
 
+        if ($orders->isEmpty()) {
+            return response()->json(['message' => 'Orders not found'], 404);
+        }
+
+        return response()->json($orders);
     }
+
     
     public function getProducts()
     {
@@ -103,14 +105,14 @@ class OrderController extends MainController
 
 
                 // ===>> Save Order Detail to DB
-                OrderDetail::insert($details);
+                
 
                 // ===>> Update Order
                 $order->total_price     = $totalPrice;
                 $order->save();
             }
         }
-
+        OrderDetail::insert($details);
        
 
         $product->stock = $totalStock;
@@ -131,9 +133,10 @@ class OrderController extends MainController
         // ->find($order->id);
 
 
-        $orderData = Order::with(['orderDetails.product:id,name,image'])
-                    ->find($order->id);
-    
+        $orderData = Order::with([
+            'cashier:id,name', // Include cashier's id and name
+            'orderDetails.product:id,name,image' // Include product details
+        ])->find($order->id);
         if (!$order) {
             return response()->json(['message' => 'Order not found'], 404);
         }
