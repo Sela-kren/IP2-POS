@@ -212,7 +212,8 @@ export default {
           }
         });
 
-        console.log('Order created:', response.data);
+        // console.log('Order created:', response.data);
+        alert('data have bean create');
         this.clearCart();
       } catch (error) {
         console.error('Error creating order:', error);
