@@ -5,6 +5,7 @@ import { fas } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome';
 import { faCartPlus } from '@fortawesome/free-solid-svg-icons';
 
+
 import './assets/css/app.css'
 
 import router from './router'

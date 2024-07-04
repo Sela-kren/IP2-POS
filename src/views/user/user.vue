@@ -178,8 +178,8 @@ export default {
           </div>
           <div class="grid grid-row-5">
            
-            <tr class="w-full h-[60px] bg-[#0F172A] flex justify-around items-center text-white">
-                <th class="text-start">Cashier</th>
+            <tr class="w-full h-[60px] bg-[#0F172A] flex justify-around items-center text-white pl-1">
+                <th class="text-start">Name</th>
                 <th class="text-start">Role</th>
                 <th class="pl-8 text-start">Contact</th>
                 <th class="text-start">Date</th>
@@ -191,6 +191,7 @@ export default {
               :image="`http://127.0.0.1:8000/storage/${user.image}`" 
               >
             </User>
+            
 
         </div>
         </div>
@@ -253,6 +254,7 @@ export default {
         console.error('Error fetching data:', error);
       }
     },
+    
     nextPage() {
       if (this.users.next_page_url) {
         this.page++;
@@ -270,7 +272,8 @@ export default {
     },
     closeModal() {
       this.isModalOpen = false;
-    }
+    },
+    
   }
 }
 </script>

@@ -14,8 +14,8 @@
                 <p class="text-[16px]">{{ this.filteredProducts.length }}</p>
                 <p class="text-[16px] ml-4">Inventory</p>
             </div>
-            <router-link :to="'/manage/'" class="flex w-[150px] h-[45px] text-[#D9D9D9] border-2 border-[#D9D9D9] rounded-md items-center justify-center space-x-4">
-                <p class="text-[16px] text-[#948984]">Create Cateory</p>
+            <router-link :to="'/manage/createCategory'" class="flex w-[150px] h-[45px] text-[#D9D9D9] border-2 border-[#D9D9D9] rounded-md items-center justify-center space-x-4">
+                <p class="text-[16px] text-[#948984]">Create Category</p>
             </router-link>    
             <router-link :to="'/manage/create'" class="flex w-[150px] h-[45px] text-[#D9D9D9] border-2 border-[#D9D9D9] rounded-md items-center justify-center space-x-4">
                 <div class="w-[20px] h-[20px] border rounded-[30px] border-[#948984] flex items-center">
