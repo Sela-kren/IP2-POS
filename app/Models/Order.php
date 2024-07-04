@@ -28,5 +28,17 @@ class Order extends Model
         return $this->hasMany(OrderDetail::class, 'order_id')
             ->select('id', 'order_id', 'quantity', 'product_id', 'unit_price', 'discount')
             ->with(['product:id,name,image']);
+
     }
+
+    // public function details()// 1:M
+    // {
+    //     return $this->hasMany(OrderDetail::class, 'order_id')
+    //      ->select('id', 'order_id', 'qty', 'product_id', 'unit_price')
+    //     ->with([
+    //         'product:id,name,image'
+    //     ])
+    //     ;
+    // }
+
 }

@@ -20,6 +20,20 @@ use App\Models\OrderDetail;
 
 class OrderController extends MainController
 {
+
+    public function getOrderDetails($id)
+    {
+        $order = Order::with(['orderDetails.product:id,name,image'])
+                    ->find($id);
+    
+        if (!$order) {
+            return response()->json(['message' => 'Order not found'], 404);
+        }
+    
+        return response()->json(['order' => $order]);
+
+    }
+    
     public function getProducts()
     {
         // ===>> Get Data from DB (group by Product type from DB)
@@ -62,51 +76,68 @@ class OrderController extends MainController
 
         // ===>> Loop Each Product ID along with quantity
         foreach ($cart as $productId => $quantity) {
-
             // ===>> Find Each Product by ID
             $product = Product::find($productId);
 
             // ===>> Check if product is valid
             if ($product) { // Yes
-
+                $unitPrice = $product->unit_price;
+                if ($product->promotion) {
+                    $discountPercentage = $product->promotion->discount_percentage;
+                    $unitPrice -= ($unitPrice * $discountPercentage) / 100;
+                }
                 // ===>> Add New Record to Array
                 $details[] = [
                     'order_id'      => $order->id,
                     'product_id'    => $productId,
                     'quantity'      => $quantity,
                     'unit_price'    => $product->unit_price,
+                    'discount'      => $discountPercentage
                 ];
 
                 // ===>> Calculate the total Price
-                $totalPrice +=  $quantity * $product->unit_price;
+                
+                $totalPrice +=  $quantity * $unitPrice;
                 $totalStock = $product->stock - $quantity;
+                OrderDetail::insert($details);
+
+                
+                
+
+                $product->stock = $totalStock;
+                $product->save();
 
             }
         }
-
-        // ===>> Save Order Detail to DB
-        OrderDetail::insert($details);
-
         // ===>> Update Order
         $order->total_price     = $totalPrice;
         $order->save();
 
-        $product->stock = $totalStock;
-        $product->save();
-
+        // ===>> Save Order Detail to DB
+        
         // ===> Get Data for Client Reponse to view the order in Popup.
-        $orderData = Order::select('*')
-        ->with([
+        // $orderData = Order::select('*')
+        // ->with([
 
-            'cashier:id,name,type_id', // M:1
-            'cashier.type:id,name',  // M:1
+        //     'cashier:id,name,type_id', // M:1
+        //     'cashier.type:id,name',  // M:1
 
-            'orderDetails:id,order_id,product_id,unit_price,quantity', // 1:M
-            'orderDetails.product:id,name,type_id', // M:1 (order_details -> product)
-            'orderDetails.product.type:id,name'  // M:1 (product -> products_type)
+        //     'orderDetails:id,order_id,product_id,unit_price,quantity', // 1:M
+        //     'orderDetails.product:id,name,type_id', // M:1 (order_details -> product)
+        //     'orderDetails.product.type:id,name'  // M:1 (product -> products_type)
 
-        ])
-        ->find($order->id);
+        // ])
+        // ->find($order->id);
+
+
+        $orderData = Order::with(['orderDetails.product:id,name,image'])
+                    ->find($order->id);
+    
+        if (!$order) {
+            return response()->json(['message' => 'Order not found'], 404);
+        }
+    
+        // return response()->json(['order' => $order]);
 
         // ===>> Send Telegram Notification
 
@@ -136,6 +167,8 @@ class OrderController extends MainController
         // ===>> Return the unique number back
         return $number;
     }
+
+    
 }
 
     // public function store(Request $request)

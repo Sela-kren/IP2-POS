@@ -20,16 +20,16 @@ class Product extends Model
         'type_id', 'code', 'name', 'image', 'unit_price', 'description', 'stock','product_name'
     ];
 
-    public function orderDetails(): HasMany
+    public function orderDetails(): HasMany // 1:M relationship with OrderDetail
     {
-        return $this->hasMany(OrderDetail::class);
+        return $this->hasMany(OrderDetail::class, 'product_id');
     }
 
     public function productType(): BelongsTo
     {
         return $this->belongsTo(ProductType::class, 'type_id');
-    }
-
+    }   
+    
     public function promotion(): HasOne
     {
         return $this->hasOne(Promotion::class, 'product_id');
