@@ -21,7 +21,7 @@
             </div> 
         </div>
         <div class="grid grid-rows-5 w-full ">
-          <div class="w-full h-[60px] bg-[#0F172A] flex items-center text-white px-5 justify-around">
+          <div class="w-full h-[60px] font-semibold bg-[#0F172A] flex items-center text-white px-5 justify-around">
               <p class=" text-center w-1/5">receipt number</p>
               <p class=" text-center w-1/5">Chasier ID</p>
               <p class=" text-center w-1/5">Chasier Name</p>
