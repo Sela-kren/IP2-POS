@@ -2,9 +2,9 @@
   <div class="h-[350px] relative border rounded-[10px] px-4 py-4 flex flex-col text-black transform scale-[0.75] md:scale-[1]">
     <div v-if="this.promotion > 0" class="absolute left-0 top-5 bg-orange-500 text-white h-7 px-8 rounded-r-md">{{ promotion}}%</div>
     <div v-else class="absolute left-0 top-5 bg-transparent text-white w-20 h-7 px-8"></div>
-    <img class="img bg-slate-50 h-3/4 object-scale-down" :src="imageUrl" alt="Product Image">
-    <p class="category flex justify-start mt-1 text-sm">{{ type.name }}</p>
-    <p class="title flex justify-start font-bold text-md w-[220px]">{{ name }} </p>
+    <img class="img bg-slate-50 h-3/4 object-cover" :src="imageUrl" alt="Product Image">
+    <p class="category flex justify-start mt-1 text-sm w-fit">{{ type.name }}</p>
+    <p class="title flex justify-start font-bold text-md w-[180px] truncate">{{ name }} </p>
     <div class="flex justify-between">
       <div class="flex text-[20px]">
         <p class="price mt-1 text-[#009C22] text-md">{{ unitPrice }}</p>

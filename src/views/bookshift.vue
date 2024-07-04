@@ -15,11 +15,11 @@
         </div>
         <div class="h-[898px] bg-white mt-4 flex py-4 px-8 w-full justify-between">
           <div class="w-3/5">
-            <div class="flex space-x-4 mb-8">
+            <div class="flex space-x-4 mb-8 w-full overflow-y-hidden">
               <div @click="filterProducts(null)" :class="{ 'bg-[#FF5E01] text-white': selectedCategory === null }" class="w-[70px] h-10 bg-[#D9D9D9] rounded-[30px] flex items-center justify-center cursor-pointer">All</div>
-              <div v-for="c in categories" :key="c.id" @click="filterProducts(c.id)" :class="{ 'bg-[#FF5E01] text-white': selectedCategory === c.id }" class="px-10 h-10 bg-[#D9D9D9] rounded-[30px] flex items-center justify-center cursor-pointer">{{c.name}}</div>
+              <div v-for="c in categories" :key="c.id" @click="filterProducts(c.id)" :class="{ 'bg-[#FF5E01] text-white': selectedCategory === c.id }" class="w-fit px-5 h-10 bg-[#D9D9D9] rounded-[30px] flex items-center justify-center cursor-pointer">{{c.name}}</div>
             </div>
-            <div class="grid grid-cols-3 ">
+            <div class="grid grid-cols-3 overflow-y-scroll max-h-[800px] gap-y-5">
 
               <Product class="w-5/6" v-for="product in filteredProducts" :key="product.id" 
                     :type_id="product.type_id" :name="product.name" :image="`http://127.0.0.1:8000/storage/${product.image}`" 
@@ -222,3 +222,14 @@ export default {
   }
 };
 </script>
+<style scoped>
+::-webkit-scrollbar{
+  height: 10px;
+}
+::-webkit-scrollbar{
+  background: #c9cddd;
+}
+/* ::-webkit-scrollbar-thumb{
+  background: linear-gradient(#252836, #e36751)
+} */
+</style>
