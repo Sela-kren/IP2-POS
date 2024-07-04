@@ -21,6 +21,7 @@ import manageUser from '@/views/manageUser.vue';
 import User from '../views/user/user.vue';
 
 
+
 const routes = [
   {
     path: '/',

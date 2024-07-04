@@ -31,7 +31,7 @@
             <div class="w-full bg-transparent rounded-md border border-stroke dark:border-dark-3 mb-3 py-[10px] px-5 text-dark-6 outline-none transition 
             focus:border-primary active:border-primary disabled:cursor-default disabled:bg-gray-2 disabled:border-gray-2
             ocus:outline-none focus:border-orange-500 focus:ring-orange-500
-            ">Cashier: Chab SreyLen
+            ">Cashier:  {{ this.users.name }}
             </div>
             <div class="gap-2 w-full flex flex-col justify-between h-5/6 mt-4 bg-transparent border-y border-stroke dark:border-dark-3 mb-3 py-[10px] px-2 text-dark-6 outline-none transition 
             focus:border-primary active:border-primary disabled:cursor-default disabled:bg-gray-2 disabled:border-gray-2
@@ -69,7 +69,7 @@
               </div>
             </div>
             <div class="w-full flex justify-end">
-              <button type="submit" class="flex w-[150px] bg-orange-500 text-sm text-white font-medium h-[45px] border-2 rounded-md items-center justify-center space-x-4">
+              <button type="submit" @click="checkout" class="flex w-[150px] bg-orange-500 text-sm text-white font-medium h-[45px] border-2 rounded-md items-center justify-center space-x-4">
                 Check out
               </button>
             </div>
@@ -79,7 +79,6 @@
     </div>
   </div> 
 </template>
-
 
 <script>
 import axios from 'axios';
@@ -102,16 +101,19 @@ export default {
       categories: [],
       filteredProducts: [],
       selectedCategory: null,
-      cart: []
+      cart: [],
+      users: {}
     };
   },
   mounted() {
     this.fetchProducts();
     this.fetchCategories();
+    this.fetchUserData();
   },
   methods: {
     async fetchProducts() {
       try {
+        
         const response = await axios.get('http://127.0.0.1:8000/api/products/all');
         this.products = response.data.map(product => {
           if (product.promotion === null) {
@@ -138,6 +140,19 @@ export default {
         console.error('Error fetching categories:', error);
       }
     },
+    fetchUserData() {
+      axios.get('http://127.0.0.1:8000/api/profile', {
+        headers: {
+          'Authorization': 'Bearer ' + localStorage.getItem('token')
+        }
+      })
+      .then(response => {
+        this.users = response.data; // Assuming response.data contains the user object
+      })
+      .catch(error => {
+        console.error('Error fetching user data:', error);
+      });
+    },
     filterProducts(id) {
       if (id === null) {
         this.filteredProducts = this.products;
@@ -163,9 +178,10 @@ export default {
           product.stock -= 1;
         }
       }
-    },
+    },    
     clearCart() {
       this.cart = [];
+      
     },
     deleteProduct(code) {
       this.cart = this.cart.filter(item => item.code !== code);
@@ -176,6 +192,31 @@ export default {
         const discountedPrice = product.unit_price * (1 - discount);
         return total + (discountedPrice * product.stock);
       }, 0).toFixed(2);
+    },
+    async checkout() {
+      try {
+        // Assuming you have stored the token in Vuex state or localStorage
+        const token = localStorage.getItem('token'); // Example: Replace with your actual storage method
+
+        // Transform cart data into the required format
+        let cart2 = {};
+        this.cart.forEach((item) => {
+          cart2[item.id] = item.stock;
+        });
+        console.log(cart2)
+        const response = await axios.post('http://127.0.0.1:8000/api/orders', {
+          cart: JSON.stringify(cart2)  // Send as JSON string
+        }, {
+          headers: {
+            'Authorization': `Bearer ${token}`  // Include Bearer token in the header
+          }
+        });
+
+        console.log('Order created:', response.data);
+        this.clearCart();
+      } catch (error) {
+        console.error('Error creating order:', error);
+      }
     }
   }
 };
