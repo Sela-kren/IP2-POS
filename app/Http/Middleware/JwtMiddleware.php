@@ -32,11 +32,4 @@ class JwtMiddleware extends BaseMiddleware
         return $next($request);
     }
 }
-/*
-|--------------------------------------------------------------------------
-| Custom middleware by: Yim Klok
-|--------------------------------------------------------------------------
-|
-| date: 22/02/2023. location: Manistry of Public Works and Transport - MPWT
-|
-*/
+
