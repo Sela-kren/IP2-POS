@@ -15,7 +15,7 @@
       <div class="px-4 md:pr-[20px] flex flex-col space-y-[10px] text-white">
         <!-- Dashboard -->
         <router-link 
-          to="/dashboard" 
+          to="/" 
           class="inline-flex items-center py-[15px] px-[30px] w-full text-xl font-medium rounded-r-[30px] hover:bg-[#FF5E01] hover:text-white"
           active-class="active-link">
           <svg aria-hidden="true" class="mr-2 w-[25px] h-[25px]" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">

@@ -11,9 +11,13 @@
                     <svg xmlns="http://www.w3.org/2000/svg" class="w-[20px] h-[20px] text-bold text-black " fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" >
                         <path stroke-linecap="round" stroke-linejoin="round" d="m8.25 4.5 7.5 7.5-7.5 7.5" />
                     </svg>
-                    <p class="text-16 font-bold">User</p>
+                    <p class="text-16 font-bold">Dashboard</p>
                 </div>
-                <div class="w-w-6/12 h-[898px] bg-white mt-4 flex  flex-col">
+                <div class="w-w-6/12 h-[898px] bg-white mt-4 flex  flex-col p-10">
+                    <div class="w-96 h-[150px] bg-[#FF5E01] rounded-lg p-5 flex items-center flex-col gap-5">
+                        <h1 class="text-4xl text-white ">Total Sales ($)</h1> 
+                        <h1 class="text-4xl text-white" >1000,000,000</h1>
+                    </div>
                 </div>
             </div> 
         </div> 
@@ -24,15 +28,13 @@
 
 import SideBar from '../components/pages/SideBar.vue';
 import Header from '../components/pages/Header.vue';
-
-// import { RouterLink, RouterView } from 'vue-router'
+import { RouterLink, RouterView } from 'vue-router'
 
 export default {
     name:"dashboard",
     components:{
         SideBar,
-        Header,
-        
+        Header,  
     }
 
 }
