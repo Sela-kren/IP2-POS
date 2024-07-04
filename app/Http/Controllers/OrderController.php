@@ -80,33 +80,37 @@ class OrderController extends MainController
         foreach ($cart as $productId => $quantity) {
             // ===>> Find Each Product by ID
             $product = Product::find($productId);
-        
-            // Check if product is valid
-            if ($product) {
-                $unitPrice = $product->unit_price;
-                $discountPercentage = 0; // Initialize discount percentage to 0
-        
-                if ($product->promotion) {
-                    $discountPercentage = $product->promotion->discount_percentage;
-                    $unitPrice -= ($unitPrice * $discountPercentage) / 100;
-                }
-        
+            
+
+            $unitPrice = $product->unit_price;
+            $discountPercentage = 0;
+            if ($product->promotion) {
+                $discountPercentage = $product->promotion->discount_percentage;
+                $unitPrice -= ($unitPrice * $discountPercentage) / 100;
+            }
+            // ===>> Check if product is valid
+            if ($product) { // Yes
+                
                 // ===>> Add New Record to Array
                 $details[] = [
                     'order_id'      => $order->id,
                     'product_id'    => $productId,
                     'quantity'      => $quantity,
-                    'unit_price'    => $unitPrice,
-                    'discount'      => $discountPercentage,
+                    'unit_price'    => $product->unit_price,
+                    'discount'    => $discountPercentage,
                 ];
-        
+
                 // ===>> Calculate the total Price
                 $totalPrice +=  $quantity * $unitPrice;
                 $totalStock = $product->stock - $quantity;
-        
-                // ===>> Update Product Stock
-                $product->stock = $totalStock;
-                $product->save();
+
+
+                // ===>> Save Order Detail to DB
+                
+
+                // ===>> Update Order
+                $order->total_price     = $totalPrice;
+                $order->save();
             }
         }
         OrderDetail::insert($details);
