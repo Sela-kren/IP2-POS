@@ -17,6 +17,12 @@ Route::get('/user', function (Request $request) {
 })->middleware('auth:sanctum');
 
 Route::post('/login', [AuthController::class, 'login']);
+Route::group(['middleware' => ['jwt.verify']], function() {
+    Route::post('logout', [AuthController::class, 'logout']);
+    // other routes
+});
+
+
 
 
 Route::get('/test', function () {
@@ -50,24 +56,18 @@ Route::get('/promotion/{id}', [PromotionController::class, 'getPromotionByid']);
 Route::get('/promotionHistory', [PromotionHistoryController::class, 'index']);
 Route::get('/promotionHistory/{productId}', [PromotionHistoryController::class, 'getPromotionHistoryByProductId']);
 
-// Route::get('/users', [UserController::class, 'index'])->name('users.index');
-// Route::post('/users', [UserController::class, 'store'])->name('users.create');
-// Route::put('/users/{id}', [UserController::class, 'update'])->name('users.update');
-// Route::delete('/users/{id}', [UserController::class, 'destroy'])->name('users.destroy');
 
-// Route::middleware('jwt.auth')->group(function () {
-//     Route::get('/user', [UserController::class, 'getData']); // Read Many Records
-// });
+
 // Route::middleware('auth:api')->get('/user', function (Request $request) {
 //     return $request->user();
 // });
 
-Route::post('/user', [UserController::class, 'create']);
-Route::get('/user-types/{id}', [UserController::class, 'getUserType']);
-Route::get('/user', [UserController::class, 'getData']); // Read Many Records
-Route::get('user/{id}', [UserController::class, 'view']); // View a Record
-Route::post('user/update/{id}', [UserController::class, 'update']); // Update Existing Record
-Route::delete('user/{id}', [UserController::class, 'delete']); // Delete a record
+Route::post('/user', [UserController::class, 'create'])->middleware('adminMiddleware');
+Route::get('/user-types/{id}', [UserController::class, 'getUserType'])->middleware('adminMiddleware');
+Route::get('/user', [UserController::class, 'getData'])->middleware('adminMiddleware'); // Read Many Records
+Route::get('user/{id}', [UserController::class, 'view'])->middleware('adminMiddleware'); // View a Record
+Route::post('user/update/{id}', [UserController::class, 'update'])->middleware('adminMiddleware'); // Update Existing Record
+Route::delete('user/{id}', [UserController::class, 'delete'])->middleware('adminMiddleware'); // Delete a record
 
 Route::get('/getproduct', [OrderController::class, 'getProducts']);
 Route::post('/orders', [OrderController::class, 'makeOrder']);
@@ -75,4 +75,14 @@ Route::post('/orders', [OrderController::class, 'makeOrder']);
 Route::post('/product-types/create', [ProductTypeController::class, 'store']);
 
 
-Route::get('/profile', [ProfileController::class, 'view']); // Get Data
+Route::get('/profile', [ProfileController::class, 'view'])->middleware('admin'); // Get Data
+
+Route::middleware(['adminMiddleware'])->group(function () {
+    Route::get('/restricted', function () {
+        return response()->json(['message' => 'Authorized']);
+    });
+
+    Route::get('/another-restricted-route', function () {
+        return response()->json(['message' => 'Authorized']);
+    });
+});
