@@ -59,7 +59,7 @@ export default {
         const token = localStorage.getItem('token');
 
         // Set authorization header with Bearer token
-        // axios.defaults.headers.common['Authorization'] = `Bearer ${token}`;
+        axios.defaults.headers.common['Authorization'] = `Bearer ${token}`;
 
         // Make API request to create user
         const response = await axios.post('http://127.0.0.1:8000/api/user', {
