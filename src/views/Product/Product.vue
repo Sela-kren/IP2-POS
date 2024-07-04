@@ -8,7 +8,7 @@
                   </svg>
                   <p class="text-16 font-bold">Inventory</p>
     </div>
-    <div class="w-w-6/12 h-[898px] bg-white mt-4 flex  flex-col">
+    <div class="w-w-6/12 h-[898px] overflow-y-scroll bg-white mt-4 flex  flex-col">
         <div class="flex justify-between px-4 py-4">
             <div class="flex font-bold pt-2">
                 <p class="text-[16px]">{{ this.filteredProducts.length }}</p>

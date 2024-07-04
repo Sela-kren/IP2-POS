@@ -158,7 +158,7 @@ export default {
           </svg>
           <p class="text-16 font-bold">User</p>
         </div>
-        <div class="w-w-6/12 h-[898px] bg-white mt-4 flex flex-col">
+        <div class="w-w-6/12 h-[898px] overflow-y-scroll bg-white mt-4 flex flex-col">
          
           <div class="flex justify-between px-4 py-4">
             <div class="flex font-bold">
