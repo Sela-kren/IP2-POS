@@ -10,6 +10,7 @@ use App\Http\Controllers\UserController;
 use App\Http\Controllers\Auth\AuthController;
 use App\Http\Controllers\OrderController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\DashboardController;
 use App\Http\Middleware\CorsMiddleware;
 
 Route::get('/user', function (Request $request) {
@@ -65,7 +66,7 @@ Route::get('/promotionHistory/{productId}', [PromotionHistoryController::class, 
 Route::post('/user', [UserController::class, 'create'])->middleware('adminMiddleware'); 
 Route::get('/user-types/{id}', [UserController::class, 'getUserType']);
 Route::get('/user', [UserController::class, 'getData'])->middleware('adminMiddleware'); // Read Many Records
-Route::get('user/{id}', [UserController::class, 'view'])->middleware('adminMiddleware'); // View a Record
+Route::get('user/{id}', [UserController::class, 'view']); // View a Record
 Route::post('user/update/{id}', [UserController::class, 'update']); // Update Existing Record
 Route::delete('user/{id}', [UserController::class, 'delete']); // Delete a record
 
@@ -88,3 +89,4 @@ Route::middleware(['adminMiddleware'])->group(function () {
     });
 });
 
+Route::get('/dashboard', [DashboardController::class, 'getDashboardInfo']);
