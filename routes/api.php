@@ -63,11 +63,11 @@ Route::get('/promotionHistory/{productId}', [PromotionHistoryController::class, 
 // });
 
 Route::post('/user', [UserController::class, 'create'])->middleware('adminMiddleware');
-Route::get('/user-types/{id}', [UserController::class, 'getUserType'])->middleware('adminMiddleware');
+Route::get('/user-types/{id}', [UserController::class, 'getUserType']);
 Route::get('/user', [UserController::class, 'getData'])->middleware('adminMiddleware'); // Read Many Records
 Route::get('user/{id}', [UserController::class, 'view'])->middleware('adminMiddleware'); // View a Record
-Route::post('user/update/{id}', [UserController::class, 'update'])->middleware('adminMiddleware'); // Update Existing Record
-Route::delete('user/{id}', [UserController::class, 'delete'])->middleware('adminMiddleware'); // Delete a record
+Route::post('user/update/{id}', [UserController::class, 'update']); // Update Existing Record
+Route::delete('user/{id}', [UserController::class, 'delete']); // Delete a record
 
 Route::get('/getproduct', [OrderController::class, 'getProducts']);
 Route::post('/orders', [OrderController::class, 'makeOrder']);
@@ -76,7 +76,7 @@ Route::get('/o/{id}', [OrderController::class, 'getOrderDetails']);
 Route::post('/product-types/create', [ProductTypeController::class, 'store']);
 
 
-Route::get('/profile', [ProfileController::class, 'view'])->middleware('admin'); // Get Data
+Route::get('/profile', [ProfileController::class, 'view']); // Get Data
 
 Route::middleware(['adminMiddleware'])->group(function () {
     Route::get('/restricted', function () {
