@@ -188,7 +188,7 @@ export default {
             </tr>
             <User v-for="user in users.data" 
               :key="user.id" :id="user.id" :name="user.name" :type_id="user.type_id" :type_name="user.type.name" :phone="user.phone" :date="user.created_at"
-              :image="`http://127.0.0.1:8000/storage/${user.image}`"  @user-deleted="removeUser"
+              :image="`http://127.0.0.1:8000/storage/${user.image}`"  @userDeleted="handleUserDeleted"
               >
             </User>
             
@@ -283,9 +283,10 @@ export default {
     closeModal() {
       this.isModalOpen = false;
     },
-    removeUser(userId) {
-      this.users = this.users.filter(user => user.id !== userId);
-    }
+    async handleUserDeleted() {
+            // Handle what happens after a product is deleted
+            await this.fetchData(); // Refresh the product list
+    },
   }
 }
 </script>

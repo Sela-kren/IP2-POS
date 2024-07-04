@@ -94,8 +94,8 @@ export default {
         console.log('Deleting user with ID:', this.id);
         const response = await axios.delete(`http://127.0.0.1:8000/api/user/${this.id}`);
         console.log('Response:', response.data);
-        alert('User Deleted Successfully');
-        window.location.reload();// Emit an event to notify the parent to remove this user from the list
+        this.$emit('userDeleted'); // Emit an event to notify the parent component to update the list
+        this.showPopup = false;// Emit an event to notify the parent to remove this user from the list
       } catch (error) {
         console.error('Error deleting user:', error);
       }
