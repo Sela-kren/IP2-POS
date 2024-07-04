@@ -188,7 +188,7 @@ export default {
             </tr>
             <User v-for="user in users.data" 
               :key="user.id" :id="user.id" :name="user.name" :type_id="user.type_id" :type_name="user.type.name" :phone="user.phone" :date="user.created_at"
-              :image="`http://127.0.0.1:8000/storage/${user.image}`" 
+              :image="`http://127.0.0.1:8000/storage/${user.image}`"  @user-deleted="removeUser"
               >
             </User>
             
@@ -208,7 +208,6 @@ import axios from 'axios';
 import Modal from '../../components/Modal.vue';
 import CreateUser from '../../views/user/createUser.vue';
 import User from '@/components/pages/User.vue';
-
 import { RouterLink } from 'vue-router';
 
 export default {
@@ -239,21 +238,32 @@ export default {
   },
   methods: {
     async fetchData() {
-      try {
-        const response = await axios.get('http://127.0.0.1:8000/api/user', {
-          params: {
-            key: this.searchKey,
-            limit: this.limit,
-            page: this.page,
-            sort: this.sort
-          }
-        });
-        this.users = response.data.data;
-        this.totalUsers = response.data.total_users;
-      } catch (error) {
-        console.error('Error fetching data:', error);
-      }
-    },
+  try {
+    const token = localStorage.getItem('token'); // Retrieve token from local storage
+    
+    if (token) {
+      const response = await axios.get('http://127.0.0.1:8000/api/user', {
+        params: {
+          key: this.searchKey,
+          limit: this.limit,
+          page: this.page,
+          sort: this.sort
+        },
+        headers: {
+          Authorization: `Bearer ${token}` // Include token in the request headers
+        }
+      });
+      
+      this.users = response.data.data;
+      this.totalUsers = response.data.total_users;
+    } else {
+      console.error('Token not found in localStorage.');
+      // Handle the case where token is not found, e.g., redirect to login page or show an error message.
+    }
+  } catch (error) {
+    console.error('Error fetching data:', error);
+  }
+},
     
     nextPage() {
       if (this.users.next_page_url) {
@@ -273,10 +283,13 @@ export default {
     closeModal() {
       this.isModalOpen = false;
     },
-    
+    removeUser(userId) {
+      this.users = this.users.filter(user => user.id !== userId);
+    }
   }
 }
 </script>
+
 
 <style scoped>
 @import url("https://fonts.googleapis.com/css2?family=Josefin+Sans&family=Quicksand:wght@300;400&display=swap");

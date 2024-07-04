@@ -57,9 +57,19 @@ export default {
       });
     },
     logout() {
-  localStorage.removeItem('token');
-  this.$router.push('/login');
-}
+      axios.post('http://127.0.0.1:8000/api/logout', {}, {
+        headers: {
+          'Authorization': 'Bearer ' + localStorage.getItem('token')
+        }
+      })
+      .then(() => {
+        localStorage.clear();
+        this.$router.push('/login');
+      })
+      .catch(error => {
+        console.error('Logout error:', error);
+      });
+    }
   }
 };
 </script>

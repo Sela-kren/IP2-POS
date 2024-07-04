@@ -23,7 +23,10 @@
           </div>
           <div class="mb-4">
             <label class="block text-gray-700 text-sm font-bold mb-2" for="type_id">Role</label>
-            <input v-model="type_id" type="text" id="type_id" class="w-[323px] p-2 border rounded border-gray-300" required />
+            <select v-model="type_id" id="type_id" class="w-[323px] p-2 border rounded border-gray-300" required>
+              <option value="1">Admin</option>
+              <option value="2">Staff</option>
+            </select>
           </div>
           <div class="flex justify-end space-x-4">
             <button type="button" @click="cancel" class="bg-gray-500 hover:bg-gray-700 text-white font-bold py-2 px-4 rounded">Cancel</button>
@@ -52,6 +55,13 @@ export default {
   methods: {
     async createUser() {
       try {
+        // Retrieve token from localStorage
+        const token = localStorage.getItem('token');
+
+        // Set authorization header with Bearer token
+        // axios.defaults.headers.common['Authorization'] = `Bearer ${token}`;
+
+        // Make API request to create user
         const response = await axios.post('http://127.0.0.1:8000/api/user', {
           name: this.name,
           email: this.email,
@@ -59,10 +69,13 @@ export default {
           password: this.password,
           type_id: this.type_id
         });
-        console.log('User created:', response.data.message);
-        this.$emit('close'); // Close modal or navigate away
-        this.$router.push('/user');// Navigate to user list
+
+        // Handle success
+        alert('User created successfully');
+        this.$router.push('/user');
+        window.location.reload(); // Reload the page
       } catch (error) {
+        // Handle error
         console.error('Error creating user:', error);
       }
     },
